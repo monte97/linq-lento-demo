@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>LinqDeepDive.Benchmarks.Benchmarks.ListLengthBenchmark-20261028-183842</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.8, Linux Ubuntu 24.04.5 LTS (Noble Numbat) (container)
+-
+.NET SDK 10.0.403
+  [Host]     : .NET 10.0.14 (10.0.14, 10.0.1426.52326), Arm64 RyuJIT armv8.0-a
+  DefaultJob : .NET 10.0.14 (10.0.14, 10.0.1426.52326), Arm64 RyuJIT armv8.0-a
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>Method     </th><th>Vehicles</th><th>ListLength</th><th>Mean    </th><th>Error </th><th>StdDev </th><th>Median  </th><th>Ratio</th><th>RatioSD</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>ListContains</td><td>500</td><td>7</td><td>2,715.1 ns</td><td>52.99 ns</td><td>63.08 ns</td><td>2,695.6 ns</td><td>1.00</td><td>0.03</td><td>-</td><td>NA</td>
+</tr><tr><td>ArrayContains</td><td>500</td><td>7</td><td>3,043.3 ns</td><td>58.60 ns</td><td>60.18 ns</td><td>3,029.2 ns</td><td>1.12</td><td>0.03</td><td>-</td><td>NA</td>
+</tr><tr><td>HashSetContains</td><td>500</td><td>7</td><td>2,022.7 ns</td><td>19.75 ns</td><td>17.50 ns</td><td>2,022.9 ns</td><td>0.75</td><td>0.02</td><td>-</td><td>NA</td>
+</tr><tr><td>FrozenSetContains</td><td>500</td><td>7</td><td>865.8 ns</td><td>17.00 ns</td><td>24.38 ns</td><td>858.5 ns</td><td>0.32</td><td>0.01</td><td>-</td><td>NA</td>
+</tr><tr><td>ListContains</td><td>500</td><td>47</td><td>18,649.2 ns</td><td>365.57 ns</td><td>435.19 ns</td><td>18,516.1 ns</td><td>1.00</td><td>0.03</td><td>-</td><td>NA</td>
+</tr><tr><td>ArrayContains</td><td>500</td><td>47</td><td>20,855.9 ns</td><td>310.38 ns</td><td>242.33 ns</td><td>20,955.2 ns</td><td>1.12</td><td>0.03</td><td>-</td><td>NA</td>
+</tr><tr><td>HashSetContains</td><td>500</td><td>47</td><td>2,018.1 ns</td><td>23.91 ns</td><td>18.67 ns</td><td>2,022.8 ns</td><td>0.11</td><td>0.00</td><td>-</td><td>NA</td>
+</tr><tr><td>FrozenSetContains</td><td>500</td><td>47</td><td>1,292.5 ns</td><td>24.81 ns</td><td>20.72 ns</td><td>1,284.8 ns</td><td>0.07</td><td>0.00</td><td>-</td><td>NA</td>
+</tr><tr><td>ListContains</td><td>500</td><td>150</td><td>52,118.4 ns</td><td>949.85 ns</td><td>932.88 ns</td><td>52,095.4 ns</td><td>1.00</td><td>0.02</td><td>-</td><td>NA</td>
+</tr><tr><td>ArrayContains</td><td>500</td><td>150</td><td>56,558.2 ns</td><td>1,078.42 ns</td><td>1,059.15 ns</td><td>56,570.5 ns</td><td>1.09</td><td>0.03</td><td>-</td><td>NA</td>
+</tr><tr><td>HashSetContains</td><td>500</td><td>150</td><td>2,058.0 ns</td><td>32.52 ns</td><td>25.39 ns</td><td>2,051.7 ns</td><td>0.04</td><td>0.00</td><td>-</td><td>NA</td>
+</tr><tr><td>FrozenSetContains</td><td>500</td><td>150</td><td>1,539.2 ns</td><td>30.40 ns</td><td>36.18 ns</td><td>1,523.4 ns</td><td>0.03</td><td>0.00</td><td>-</td><td>NA</td>
+</tr><tr><td>ListContains</td><td>500</td><td>224</td><td>88,490.7 ns</td><td>1,723.52 ns</td><td>1,692.72 ns</td><td>88,242.3 ns</td><td>1.00</td><td>0.03</td><td>-</td><td>NA</td>
+</tr><tr><td>ArrayContains</td><td>500</td><td>224</td><td>96,556.3 ns</td><td>1,316.95 ns</td><td>1,099.71 ns</td><td>96,084.4 ns</td><td>1.09</td><td>0.02</td><td>-</td><td>NA</td>
+</tr><tr><td>HashSetContains</td><td>500</td><td>224</td><td>2,055.1 ns</td><td>17.61 ns</td><td>14.71 ns</td><td>2,054.3 ns</td><td>0.02</td><td>0.00</td><td>-</td><td>NA</td>
+</tr><tr><td>FrozenSetContains</td><td>500</td><td>224</td><td>1,517.3 ns</td><td>14.17 ns</td><td>13.92 ns</td><td>1,516.4 ns</td><td>0.02</td><td>0.00</td><td>-</td><td>NA</td>
+</tr><tr><td>ListContains</td><td>500</td><td>700</td><td>200,619.9 ns</td><td>3,937.83 ns</td><td>5,893.96 ns</td><td>199,301.0 ns</td><td>1.001</td><td>0.04</td><td>-</td><td>NA</td>
+</tr><tr><td>ArrayContains</td><td>500</td><td>700</td><td>223,243.5 ns</td><td>3,247.36 ns</td><td>2,711.70 ns</td><td>222,296.5 ns</td><td>1.114</td><td>0.03</td><td>-</td><td>NA</td>
+</tr><tr><td>HashSetContains</td><td>500</td><td>700</td><td>2,100.1 ns</td><td>39.73 ns</td><td>39.02 ns</td><td>2,093.2 ns</td><td>0.010</td><td>0.00</td><td>-</td><td>NA</td>
+</tr><tr><td>FrozenSetContains</td><td>500</td><td>700</td><td>1,182.4 ns</td><td>23.38 ns</td><td>46.69 ns</td><td>1,162.9 ns</td><td>0.006</td><td>0.00</td><td>-</td><td>NA</td>
+</tr><tr><td>ListContains</td><td>5000</td><td>7</td><td>29,089.0 ns</td><td>402.90 ns</td><td>376.87 ns</td><td>29,155.4 ns</td><td>1.00</td><td>0.02</td><td>-</td><td>NA</td>
+</tr><tr><td>ArrayContains</td><td>5000</td><td>7</td><td>31,014.3 ns</td><td>437.24 ns</td><td>365.12 ns</td><td>30,981.2 ns</td><td>1.07</td><td>0.02</td><td>-</td><td>NA</td>
+</tr><tr><td>HashSetContains</td><td>5000</td><td>7</td><td>20,540.4 ns</td><td>335.87 ns</td><td>297.74 ns</td><td>20,473.1 ns</td><td>0.71</td><td>0.01</td><td>-</td><td>NA</td>
+</tr><tr><td>FrozenSetContains</td><td>5000</td><td>7</td><td>9,197.0 ns</td><td>177.28 ns</td><td>197.05 ns</td><td>9,157.5 ns</td><td>0.32</td><td>0.01</td><td>-</td><td>NA</td>
+</tr><tr><td>ListContains</td><td>5000</td><td>47</td><td>196,741.3 ns</td><td>3,068.63 ns</td><td>3,880.83 ns</td><td>195,896.0 ns</td><td>1.00</td><td>0.03</td><td>-</td><td>NA</td>
+</tr><tr><td>ArrayContains</td><td>5000</td><td>47</td><td>214,807.5 ns</td><td>3,986.05 ns</td><td>3,328.53 ns</td><td>213,728.8 ns</td><td>1.09</td><td>0.03</td><td>-</td><td>NA</td>
+</tr><tr><td>HashSetContains</td><td>5000</td><td>47</td><td>20,883.7 ns</td><td>322.18 ns</td><td>251.54 ns</td><td>20,779.6 ns</td><td>0.11</td><td>0.00</td><td>-</td><td>NA</td>
+</tr><tr><td>FrozenSetContains</td><td>5000</td><td>47</td><td>13,034.8 ns</td><td>195.69 ns</td><td>163.41 ns</td><td>13,025.2 ns</td><td>0.07</td><td>0.00</td><td>-</td><td>NA</td>
+</tr><tr><td>ListContains</td><td>5000</td><td>150</td><td>511,588.8 ns</td><td>10,049.07 ns</td><td>10,752.40 ns</td><td>511,535.8 ns</td><td>1.00</td><td>0.03</td><td>-</td><td>NA</td>
+</tr><tr><td>ArrayContains</td><td>5000</td><td>150</td><td>568,253.5 ns</td><td>8,840.03 ns</td><td>10,180.19 ns</td><td>566,564.6 ns</td><td>1.11</td><td>0.03</td><td>-</td><td>NA</td>
+</tr><tr><td>HashSetContains</td><td>5000</td><td>150</td><td>21,671.5 ns</td><td>401.74 ns</td><td>356.13 ns</td><td>21,599.5 ns</td><td>0.04</td><td>0.00</td><td>-</td><td>NA</td>
+</tr><tr><td>FrozenSetContains</td><td>5000</td><td>150</td><td>15,287.1 ns</td><td>196.79 ns</td><td>193.27 ns</td><td>15,246.1 ns</td><td>0.03</td><td>0.00</td><td>-</td><td>NA</td>
+</tr><tr><td>ListContains</td><td>5000</td><td>224</td><td>888,053.1 ns</td><td>16,355.79 ns</td><td>12,769.52 ns</td><td>890,379.4 ns</td><td>1.00</td><td>0.02</td><td>-</td><td>NA</td>
+</tr><tr><td>ArrayContains</td><td>5000</td><td>224</td><td>959,708.5 ns</td><td>14,276.74 ns</td><td>11,921.72 ns</td><td>954,880.3 ns</td><td>1.08</td><td>0.02</td><td>-</td><td>NA</td>
+</tr><tr><td>HashSetContains</td><td>5000</td><td>224</td><td>20,468.2 ns</td><td>323.72 ns</td><td>252.74 ns</td><td>20,445.9 ns</td><td>0.02</td><td>0.00</td><td>-</td><td>NA</td>
+</tr><tr><td>FrozenSetContains</td><td>5000</td><td>224</td><td>15,156.7 ns</td><td>257.45 ns</td><td>214.98 ns</td><td>15,102.4 ns</td><td>0.02</td><td>0.00</td><td>-</td><td>NA</td>
+</tr><tr><td>ListContains</td><td>5000</td><td>700</td><td>2,105,132.8 ns</td><td>41,831.48 ns</td><td>110,200.86 ns</td><td>2,084,553.3 ns</td><td>1.003</td><td>0.07</td><td>-</td><td>NA</td>
+</tr><tr><td>ArrayContains</td><td>5000</td><td>700</td><td>2,242,132.4 ns</td><td>44,540.43 ns</td><td>39,483.93 ns</td><td>2,231,369.4 ns</td><td>1.068</td><td>0.06</td><td>-</td><td>NA</td>
+</tr><tr><td>HashSetContains</td><td>5000</td><td>700</td><td>22,014.3 ns</td><td>429.97 ns</td><td>730.11 ns</td><td>21,743.0 ns</td><td>0.010</td><td>0.00</td><td>-</td><td>NA</td>
+</tr><tr><td>FrozenSetContains</td><td>5000</td><td>700</td><td>11,954.5 ns</td><td>127.81 ns</td><td>106.73 ns</td><td>11,916.4 ns</td><td>0.006</td><td>0.00</td><td>-</td><td>NA</td>
+</tr></tbody></table>
+</body>
+</html>

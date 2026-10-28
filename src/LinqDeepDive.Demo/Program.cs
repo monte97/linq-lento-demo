@@ -1,3 +1,4 @@
+using LinqDeepDive.Demo;
 using LinqDeepDive.Domain;
 using LinqDeepDive.Demo.Errors;
 using LinqDeepDive.Domain.Scenarios;
@@ -5,6 +6,10 @@ using Spectre.Console;
 
 // Modalita' non interattiva: dotnet run --project src/LinqDeepDive.Demo -- --all S|M|L|XL|XXL
 // oppure --custom <veicoli> <consegne> <vincoli> <zone>. Tempi a colpo singolo: solo orientamento.
+// Modalita' per il palco (vedi LiveDemo.cs): --dispatch <scala> [--prima|--dopo] | --enumeration <scala>
+if (args.Length >= 2 && args[0] == "--dispatch") { LiveDemo.Dispatch(LiveDemo.ScaleFor(args[1]), soloBefore: args.Contains("--prima"), soloAfter: args.Contains("--dopo")); return; }
+if (args.Length >= 2 && args[0] == "--enumeration") { LiveDemo.Enumeration(LiveDemo.ScaleFor(args[1])); return; }
+
 if (args.Length >= 2 && args[0] is "--all" or "--custom")
 {
     var opts = args[0] == "--all"

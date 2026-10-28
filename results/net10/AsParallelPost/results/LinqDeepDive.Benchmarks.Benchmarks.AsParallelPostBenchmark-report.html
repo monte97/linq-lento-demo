@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>LinqDeepDive.Benchmarks.Benchmarks.AsParallelPostBenchmark-20261028-180452</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.8, Linux Ubuntu 24.04.5 LTS (Noble Numbat) (container)
+-
+.NET SDK 10.0.403
+  [Host]     : .NET 10.0.14 (10.0.14, 10.0.1426.52326), Arm64 RyuJIT armv8.0-a
+  DefaultJob : .NET 10.0.14 (10.0.14, 10.0.1426.52326), Arm64 RyuJIT armv8.0-a
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>Method          </th><th>Vehicles</th><th>Work</th><th>Mean    </th><th>Error  </th><th>StdDev </th><th>Ratio</th><th>RatioSD</th><th>Gen0</th><th>Gen1</th><th>Gen2</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>ForeachPreallocated</td><td>50</td><td>Heavy</td><td>19.857 &mu;s</td><td>0.3575 &mu;s</td><td>0.2791 &mu;s</td><td>1.00</td><td>0.02</td><td>1.3428</td><td>-</td><td>-</td><td>5.58 KB</td><td>1.00</td>
+</tr><tr><td>SequentialToDictionary</td><td>50</td><td>Heavy</td><td>19.651 &mu;s</td><td>0.3672 &mu;s</td><td>0.3435 &mu;s</td><td>0.99</td><td>0.02</td><td>1.3733</td><td>-</td><td>-</td><td>5.64 KB</td><td>1.01</td>
+</tr><tr><td>ParallelToDictionary</td><td>50</td><td>Heavy</td><td>20.155 &mu;s</td><td>0.3619 &mu;s</td><td>0.2826 &mu;s</td><td>1.02</td><td>0.02</td><td>1.9226</td><td>-</td><td>-</td><td>7.86 KB</td><td>1.41</td>
+</tr><tr><td>ForeachPreallocated</td><td>50</td><td>Light</td><td>5.015 &mu;s</td><td>0.0995 &mu;s</td><td>0.1549 &mu;s</td><td>1.00</td><td>0.04</td><td>1.3657</td><td>-</td><td>-</td><td>5.58 KB</td><td>1.00</td>
+</tr><tr><td>SequentialToDictionary</td><td>50</td><td>Light</td><td>4.711 &mu;s</td><td>0.0303 &mu;s</td><td>0.0298 &mu;s</td><td>0.94</td><td>0.03</td><td>1.3809</td><td>-</td><td>-</td><td>5.64 KB</td><td>1.01</td>
+</tr><tr><td>ParallelToDictionary</td><td>50</td><td>Light</td><td>5.337 &mu;s</td><td>0.1047 &mu;s</td><td>0.1468 &mu;s</td><td>1.07</td><td>0.04</td><td>1.9226</td><td>-</td><td>-</td><td>7.86 KB</td><td>1.41</td>
+</tr><tr><td>ForeachPreallocated</td><td>200</td><td>Heavy</td><td>312.547 &mu;s</td><td>5.8416 &mu;s</td><td>5.1784 &mu;s</td><td>1.00</td><td>0.02</td><td>5.3711</td><td>-</td><td>-</td><td>21.98 KB</td><td>1.00</td>
+</tr><tr><td>SequentialToDictionary</td><td>200</td><td>Heavy</td><td>321.067 &mu;s</td><td>6.0583 &mu;s</td><td>5.0589 &mu;s</td><td>1.03</td><td>0.02</td><td>5.3711</td><td>-</td><td>-</td><td>22.05 KB</td><td>1.00</td>
+</tr><tr><td>ParallelToDictionary</td><td>200</td><td>Heavy</td><td>311.222 &mu;s</td><td>3.8958 &mu;s</td><td>4.4864 &mu;s</td><td>1.00</td><td>0.02</td><td>7.8125</td><td>-</td><td>-</td><td>33.12 KB</td><td>1.51</td>
+</tr><tr><td>ForeachPreallocated</td><td>200</td><td>Light</td><td>21.176 &mu;s</td><td>0.3799 &mu;s</td><td>0.2966 &mu;s</td><td>1.00</td><td>0.02</td><td>5.3711</td><td>-</td><td>-</td><td>21.98 KB</td><td>1.00</td>
+</tr><tr><td>SequentialToDictionary</td><td>200</td><td>Light</td><td>20.783 &mu;s</td><td>0.3864 &mu;s</td><td>0.3614 &mu;s</td><td>0.98</td><td>0.02</td><td>5.3711</td><td>-</td><td>-</td><td>22.05 KB</td><td>1.00</td>
+</tr><tr><td>ParallelToDictionary</td><td>200</td><td>Light</td><td>22.510 &mu;s</td><td>0.4500 &mu;s</td><td>1.0869 &mu;s</td><td>1.06</td><td>0.05</td><td>8.0872</td><td>-</td><td>-</td><td>33.12 KB</td><td>1.51</td>
+</tr><tr><td>ForeachPreallocated</td><td>500</td><td>Heavy</td><td>1,971.547 &mu;s</td><td>34.4305 &mu;s</td><td>30.5217 &mu;s</td><td>1.00</td><td>0.02</td><td>11.7188</td><td>-</td><td>-</td><td>53.27 KB</td><td>1.00</td>
+</tr><tr><td>SequentialToDictionary</td><td>500</td><td>Heavy</td><td>1,989.028 &mu;s</td><td>34.2762 &mu;s</td><td>30.3850 &mu;s</td><td>1.01</td><td>0.02</td><td>11.7188</td><td>-</td><td>-</td><td>53.34 KB</td><td>1.00</td>
+</tr><tr><td>ParallelToDictionary</td><td>500</td><td>Heavy</td><td>1,943.915 &mu;s</td><td>9.8841 &mu;s</td><td>7.7169 &mu;s</td><td>0.99</td><td>0.01</td><td>17.5781</td><td>-</td><td>-</td><td>76.9 KB</td><td>1.44</td>
+</tr><tr><td>ForeachPreallocated</td><td>500</td><td>Light</td><td>79.817 &mu;s</td><td>1.5734 &mu;s</td><td>1.6158 &mu;s</td><td>1.00</td><td>0.03</td><td>12.9395</td><td>-</td><td>-</td><td>53.27 KB</td><td>1.00</td>
+</tr><tr><td>SequentialToDictionary</td><td>500</td><td>Light</td><td>66.269 &mu;s</td><td>1.3131 &mu;s</td><td>1.5122 &mu;s</td><td>0.83</td><td>0.02</td><td>13.0615</td><td>-</td><td>-</td><td>53.34 KB</td><td>1.00</td>
+</tr><tr><td>ParallelToDictionary</td><td>500</td><td>Light</td><td>70.471 &mu;s</td><td>1.4081 &mu;s</td><td>1.5651 &mu;s</td><td>0.88</td><td>0.03</td><td>18.7988</td><td>1.3428</td><td>-</td><td>76.9 KB</td><td>1.44</td>
+</tr><tr><td>ForeachPreallocated</td><td>2000</td><td>Heavy</td><td>31,129.106 &mu;s</td><td>126.1038 &mu;s</td><td>105.3024 &mu;s</td><td>1.00</td><td>0.00</td><td>-</td><td>-</td><td>-</td><td>217.57 KB</td><td>1.00</td>
+</tr><tr><td>SequentialToDictionary</td><td>2000</td><td>Heavy</td><td>39,680.515 &mu;s</td><td>673.6920 &mu;s</td><td>852.0047 &mu;s</td><td>1.27</td><td>0.03</td><td>-</td><td>-</td><td>-</td><td>217.63 KB</td><td>1.00</td>
+</tr><tr><td>ParallelToDictionary</td><td>2000</td><td>Heavy</td><td>31,790.243 &mu;s</td><td>463.4350 &mu;s</td><td>361.8196 &mu;s</td><td>1.02</td><td>0.01</td><td>62.5000</td><td>-</td><td>-</td><td>322.7 KB</td><td>1.48</td>
+</tr><tr><td>ForeachPreallocated</td><td>2000</td><td>Light</td><td>299.178 &mu;s</td><td>4.5045 &mu;s</td><td>4.4240 &mu;s</td><td>1.00</td><td>0.02</td><td>52.7344</td><td>7.3242</td><td>-</td><td>217.57 KB</td><td>1.00</td>
+</tr><tr><td>SequentialToDictionary</td><td>2000</td><td>Light</td><td>294.347 &mu;s</td><td>5.1114 &mu;s</td><td>3.9906 &mu;s</td><td>0.98</td><td>0.02</td><td>53.2227</td><td>7.3242</td><td>-</td><td>217.63 KB</td><td>1.00</td>
+</tr><tr><td>ParallelToDictionary</td><td>2000</td><td>Light</td><td>306.573 &mu;s</td><td>5.8482 &mu;s</td><td>4.8835 &mu;s</td><td>1.02</td><td>0.02</td><td>78.6133</td><td>17.0898</td><td>-</td><td>322.7 KB</td><td>1.48</td>
+</tr><tr><td>ForeachPreallocated</td><td>5000</td><td>Heavy</td><td>197,572.510 &mu;s</td><td>3,751.8157 &mu;s</td><td>3,325.8869 &mu;s</td><td>1.00</td><td>0.02</td><td>-</td><td>-</td><td>-</td><td>543.86 KB</td><td>1.00</td>
+</tr><tr><td>SequentialToDictionary</td><td>5000</td><td>Heavy</td><td>258,800.095 &mu;s</td><td>5,065.6281 &mu;s</td><td>8,601.8216 &mu;s</td><td>1.31</td><td>0.05</td><td>-</td><td>-</td><td>-</td><td>543.92 KB</td><td>1.00</td>
+</tr><tr><td>ParallelToDictionary</td><td>5000</td><td>Heavy</td><td>202,089.215 &mu;s</td><td>3,419.5620 &mu;s</td><td>2,855.4891 &mu;s</td><td>1.02</td><td>0.02</td><td>-</td><td>-</td><td>-</td><td>745 KB</td><td>1.37</td>
+</tr><tr><td>ForeachPreallocated</td><td>5000</td><td>Light</td><td>666.101 &mu;s</td><td>13.1131 &mu;s</td><td>13.4662 &mu;s</td><td>1.00</td><td>0.03</td><td>115.2344</td><td>4.8828</td><td>4.8828</td><td>543.87 KB</td><td>1.00</td>
+</tr><tr><td>SequentialToDictionary</td><td>5000</td><td>Light</td><td>744.212 &mu;s</td><td>14.1460 &mu;s</td><td>14.5269 &mu;s</td><td>1.12</td><td>0.03</td><td>115.2344</td><td>4.8828</td><td>4.8828</td><td>543.93 KB</td><td>1.00</td>
+</tr><tr><td>ParallelToDictionary</td><td>5000</td><td>Light</td><td>780.300 &mu;s</td><td>15.2441 &mu;s</td><td>23.2794 &mu;s</td><td>1.17</td><td>0.04</td><td>156.2500</td><td>7.8125</td><td>6.8359</td><td>745.04 KB</td><td>1.37</td>
+</tr></tbody></table>
+</body>
+</html>

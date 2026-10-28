@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>LinqDeepDive.Benchmarks.Benchmarks.MultipleEnumerationBenchmark-20261028-173658</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.8, Linux Ubuntu 24.04.5 LTS (Noble Numbat) (container)
+-
+.NET SDK 10.0.403
+  [Host]     : .NET 10.0.14 (10.0.14, 10.0.1426.52326), Arm64 RyuJIT armv8.0-a
+  DefaultJob : .NET 10.0.14 (10.0.14, 10.0.1426.52326), Arm64 RyuJIT armv8.0-a
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>Method     </th><th>Scale</th><th>Mean </th><th>Error</th><th>StdDev</th><th>Ratio</th><th>RatioSD</th><th>Gen0</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>ThreeEnumerations</td><td>L</td><td>26,838.0 ns</td><td>287.04 ns</td><td>239.69 ns</td><td>1.00</td><td>0.01</td><td>-</td><td>72 B</td><td>1.00</td>
+</tr><tr><td>MaterializedOnce</td><td>L</td><td>12,443.7 ns</td><td>136.99 ns</td><td>114.39 ns</td><td>0.46</td><td>0.01</td><td>0.6409</td><td>2736 B</td><td>38.00</td>
+</tr><tr><td>ThreeEnumerations</td><td>M</td><td>9,914.8 ns</td><td>191.87 ns</td><td>149.80 ns</td><td>1.00</td><td>0.02</td><td>0.0153</td><td>72 B</td><td>1.00</td>
+</tr><tr><td>MaterializedOnce</td><td>M</td><td>4,689.9 ns</td><td>93.37 ns</td><td>114.67 ns</td><td>0.47</td><td>0.01</td><td>0.2747</td><td>1168 B</td><td>16.22</td>
+</tr><tr><td>ThreeEnumerations</td><td>S</td><td>900.1 ns</td><td>8.42 ns</td><td>7.03 ns</td><td>1.00</td><td>0.01</td><td>0.0172</td><td>72 B</td><td>1.00</td>
+</tr><tr><td>MaterializedOnce</td><td>S</td><td>474.4 ns</td><td>8.89 ns</td><td>8.73 ns</td><td>0.53</td><td>0.01</td><td>0.0668</td><td>280 B</td><td>3.89</td>
+</tr><tr><td>ThreeEnumerations</td><td>XL</td><td>58,621.0 ns</td><td>1,086.82 ns</td><td>1,016.61 ns</td><td>1.00</td><td>0.02</td><td>-</td><td>72 B</td><td>1.00</td>
+</tr><tr><td>MaterializedOnce</td><td>XL</td><td>27,019.1 ns</td><td>439.21 ns</td><td>366.76 ns</td><td>0.46</td><td>0.01</td><td>1.2512</td><td>5328 B</td><td>74.00</td>
+</tr></tbody></table>
+</body>
+</html>

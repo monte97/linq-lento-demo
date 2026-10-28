@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>LinqDeepDive.Benchmarks.Benchmarks.MultipleEnumerationBenchmark-20261028-172825</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.8, Linux Debian GNU/Linux 12 (bookworm) (container)
+-
+.NET SDK 8.0.427
+  [Host]     : .NET 8.0.33 (8.0.33, 8.0.3326.52219), Arm64 RyuJIT armv8.0-a
+  DefaultJob : .NET 8.0.33 (8.0.33, 8.0.3326.52219), Arm64 RyuJIT armv8.0-a
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>Method     </th><th>Scale</th><th>Mean  </th><th>Error</th><th>StdDev</th><th>Median</th><th>Ratio</th><th>RatioSD</th><th>Gen0</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>ThreeEnumerations</td><td>L</td><td>51,935.7 ns</td><td>1,098.36 ns</td><td>3,133.69 ns</td><td>51,009.2 ns</td><td>1.00</td><td>0.08</td><td>14.3433</td><td>58.73 KB</td><td>1.00</td>
+</tr><tr><td>MaterializedOnce</td><td>L</td><td>21,673.5 ns</td><td>851.08 ns</td><td>2,428.17 ns</td><td>20,723.4 ns</td><td>0.42</td><td>0.05</td><td>9.1553</td><td>37.48 KB</td><td>0.64</td>
+</tr><tr><td>ThreeEnumerations</td><td>M</td><td>24,359.4 ns</td><td>1,808.04 ns</td><td>4,949.49 ns</td><td>24,116.2 ns</td><td>1.04</td><td>0.29</td><td>5.6458</td><td>23.15 KB</td><td>1.00</td>
+</tr><tr><td>MaterializedOnce</td><td>M</td><td>7,794.3 ns</td><td>193.09 ns</td><td>522.03 ns</td><td>7,589.3 ns</td><td>0.33</td><td>0.06</td><td>3.3569</td><td>13.73 KB</td><td>0.59</td>
+</tr><tr><td>ThreeEnumerations</td><td>S</td><td>1,559.6 ns</td><td>24.39 ns</td><td>20.37 ns</td><td>1,555.4 ns</td><td>1.00</td><td>0.02</td><td>0.6256</td><td>2.56 KB</td><td>1.00</td>
+</tr><tr><td>MaterializedOnce</td><td>S</td><td>740.3 ns</td><td>14.43 ns</td><td>12.79 ns</td><td>739.5 ns</td><td>0.47</td><td>0.01</td><td>0.3920</td><td>1.6 KB</td><td>0.62</td>
+</tr><tr><td>ThreeEnumerations</td><td>XL</td><td>106,153.6 ns</td><td>1,694.37 ns</td><td>1,414.88 ns</td><td>105,785.7 ns</td><td>1.00</td><td>0.02</td><td>28.5645</td><td>117.13 KB</td><td>1.00</td>
+</tr><tr><td>MaterializedOnce</td><td>XL</td><td>42,132.6 ns</td><td>808.99 ns</td><td>675.54 ns</td><td>41,818.1 ns</td><td>0.40</td><td>0.01</td><td>18.3105</td><td>74.8 KB</td><td>0.64</td>
+</tr></tbody></table>
+</body>
+</html>
