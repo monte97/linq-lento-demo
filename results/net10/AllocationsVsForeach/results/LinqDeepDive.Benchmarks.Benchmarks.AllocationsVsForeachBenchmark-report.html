@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>LinqDeepDive.Benchmarks.Benchmarks.AllocationsVsForeachBenchmark-20261028-164624</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.8, Linux Ubuntu 24.04.5 LTS (Noble Numbat) (container)
+-
+.NET SDK 10.0.403
+  [Host]     : .NET 10.0.14 (10.0.14, 10.0.1426.52326), Arm64 RyuJIT armv8.0-a
+  DefaultJob : .NET 10.0.14 (10.0.14, 10.0.1426.52326), Arm64 RyuJIT armv8.0-a
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>Method      </th><th>Categories</th><th>Scale</th><th>Mean   </th><th>Error  </th><th>StdDev </th><th>Median </th><th>Ratio</th><th>RatioSD</th><th>Gen0</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>CountGreaterZero</td><td>Exists</td><td>L</td><td>19,707.054 ns</td><td>1,460.8488 ns</td><td>4,144.1853 ns</td><td>17,695.178 ns</td><td>1.035</td><td>0.28</td><td>-</td><td>72 B</td><td>1.00</td>
+</tr><tr><td>AnyEarlyExit</td><td>Exists</td><td>L</td><td>2.750 ns</td><td>0.0780 ns</td><td>0.1502 ns</td><td>2.703 ns</td><td>0.000</td><td>0.00</td><td>-</td><td>-</td><td>0.00</td>
+</tr><tr><td>CountGreaterZero</td><td>Exists</td><td>M</td><td>6,676.647 ns</td><td>131.5001 ns</td><td>204.7298 ns</td><td>6,568.292 ns</td><td>1.001</td><td>0.04</td><td>0.0153</td><td>72 B</td><td>1.00</td>
+</tr><tr><td>AnyEarlyExit</td><td>Exists</td><td>M</td><td>16.245 ns</td><td>0.2772 ns</td><td>0.3082 ns</td><td>16.099 ns</td><td>0.002</td><td>0.00</td><td>-</td><td>-</td><td>0.00</td>
+</tr><tr><td>CountGreaterZero</td><td>Exists</td><td>S</td><td>681.101 ns</td><td>5.5593 ns</td><td>4.6423 ns</td><td>680.218 ns</td><td>1.00</td><td>0.01</td><td>0.0172</td><td>72 B</td><td>1.00</td>
+</tr><tr><td>AnyEarlyExit</td><td>Exists</td><td>S</td><td>9.589 ns</td><td>0.2138 ns</td><td>0.3631 ns</td><td>9.546 ns</td><td>0.01</td><td>0.00</td><td>-</td><td>-</td><td>0.00</td>
+</tr><tr><td>CountGreaterZero</td><td>Exists</td><td>XL</td><td>35,258.949 ns</td><td>671.8513 ns</td><td>689.9418 ns</td><td>35,291.484 ns</td><td>1.000</td><td>0.03</td><td>-</td><td>72 B</td><td>1.00</td>
+</tr><tr><td>AnyEarlyExit</td><td>Exists</td><td>XL</td><td>3.109 ns</td><td>0.0835 ns</td><td>0.0740 ns</td><td>3.079 ns</td><td>0.000</td><td>0.00</td><td>-</td><td>-</td><td>0.00</td>
+</tr><tr><td>OrderByFirst</td><td>Max</td><td>L</td><td>12,612.292 ns</td><td>212.0321 ns</td><td>208.2439 ns</td><td>12,527.914 ns</td><td>1.00</td><td>0.02</td><td>0.0305</td><td>160 B</td><td>1.00</td>
+</tr><tr><td>MaxByLinear</td><td>Max</td><td>L</td><td>12,531.496 ns</td><td>96.4493 ns</td><td>75.3013 ns</td><td>12,518.795 ns</td><td>0.99</td><td>0.02</td><td>0.0153</td><td>72 B</td><td>0.45</td>
+</tr><tr><td>OrderByFirst</td><td>Max</td><td>M</td><td>4,893.760 ns</td><td>72.8077 ns</td><td>83.8454 ns</td><td>4,868.804 ns</td><td>1.00</td><td>0.02</td><td>0.0381</td><td>160 B</td><td>1.00</td>
+</tr><tr><td>MaxByLinear</td><td>Max</td><td>M</td><td>4,912.026 ns</td><td>67.9804 ns</td><td>56.7668 ns</td><td>4,912.158 ns</td><td>1.00</td><td>0.02</td><td>0.0153</td><td>72 B</td><td>0.45</td>
+</tr><tr><td>OrderByFirst</td><td>Max</td><td>S</td><td>429.848 ns</td><td>8.6093 ns</td><td>10.5729 ns</td><td>427.411 ns</td><td>1.00</td><td>0.03</td><td>0.0381</td><td>160 B</td><td>1.00</td>
+</tr><tr><td>MaxByLinear</td><td>Max</td><td>S</td><td>403.945 ns</td><td>7.5501 ns</td><td>7.4152 ns</td><td>403.167 ns</td><td>0.94</td><td>0.03</td><td>0.0172</td><td>72 B</td><td>0.45</td>
+</tr><tr><td>OrderByFirst</td><td>Max</td><td>XL</td><td>26,716.724 ns</td><td>531.5925 ns</td><td>672.2944 ns</td><td>26,417.416 ns</td><td>1.00</td><td>0.03</td><td>0.0305</td><td>160 B</td><td>1.00</td>
+</tr><tr><td>MaxByLinear</td><td>Max</td><td>XL</td><td>26,311.255 ns</td><td>312.7563 ns</td><td>321.1777 ns</td><td>26,336.632 ns</td><td>0.99</td><td>0.03</td><td>-</td><td>72 B</td><td>0.45</td>
+</tr><tr><td>IntermediateToList</td><td>Pipeline</td><td>L</td><td>33,035.417 ns</td><td>454.2239 ns</td><td>354.6281 ns</td><td>32,926.256 ns</td><td>1.00</td><td>0.01</td><td>14.3433</td><td>60488 B</td><td>1.00</td>
+</tr><tr><td>LazyPipeline</td><td>Pipeline</td><td>L</td><td>22,053.935 ns</td><td>491.7546 ns</td><td>1,370.8153 ns</td><td>21,546.321 ns</td><td>0.67</td><td>0.04</td><td>5.3101</td><td>22336 B</td><td>0.37</td>
+</tr><tr><td>IntermediateToList</td><td>Pipeline</td><td>M</td><td>11,966.878 ns</td><td>217.0440 ns</td><td>337.9115 ns</td><td>11,813.834 ns</td><td>1.00</td><td>0.04</td><td>5.7831</td><td>24280 B</td><td>1.00</td>
+</tr><tr><td>LazyPipeline</td><td>Pipeline</td><td>M</td><td>8,069.285 ns</td><td>160.6941 ns</td><td>431.6943 ns</td><td>7,928.307 ns</td><td>0.67</td><td>0.04</td><td>2.1667</td><td>9064 B</td><td>0.37</td>
+</tr><tr><td>IntermediateToList</td><td>Pipeline</td><td>S</td><td>1,204.741 ns</td><td>45.4366 ns</td><td>121.2795 ns</td><td>1,177.677 ns</td><td>1.01</td><td>0.14</td><td>0.7191</td><td>3008 B</td><td>1.00</td>
+</tr><tr><td>LazyPipeline</td><td>Pipeline</td><td>S</td><td>716.810 ns</td><td>14.3067 ns</td><td>32.2925 ns</td><td>707.609 ns</td><td>0.60</td><td>0.06</td><td>0.3519</td><td>1472 B</td><td>0.49</td>
+</tr><tr><td>IntermediateToList</td><td>Pipeline</td><td>XL</td><td>75,291.024 ns</td><td>1,454.7221 ns</td><td>3,283.5504 ns</td><td>73,945.974 ns</td><td>1.00</td><td>0.06</td><td>29.0527</td><td>122336 B</td><td>1.00</td>
+</tr><tr><td>LazyPipeline</td><td>Pipeline</td><td>XL</td><td>47,083.743 ns</td><td>753.9667 ns</td><td>868.2692 ns</td><td>46,915.560 ns</td><td>0.63</td><td>0.03</td><td>10.8032</td><td>45208 B</td><td>0.37</td>
+</tr></tbody></table>
+</body>
+</html>

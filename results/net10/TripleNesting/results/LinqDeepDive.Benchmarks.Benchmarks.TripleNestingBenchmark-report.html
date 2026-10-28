@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>LinqDeepDive.Benchmarks.Benchmarks.TripleNestingBenchmark-20261028-140102</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.8, Linux Ubuntu 24.04.5 LTS (Noble Numbat) (container)
+-
+.NET SDK 10.0.403
+  [Host]     : .NET 10.0.14 (10.0.14, 10.0.1426.52326), Arm64 RyuJIT armv8.0-a
+  DefaultJob : .NET 10.0.14 (10.0.14, 10.0.1426.52326), Arm64 RyuJIT armv8.0-a
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>Method</th><th>Scale</th><th>Mean    </th><th>Error  </th><th>StdDev </th><th>Ratio</th><th>RatioSD</th><th>Gen0</th><th>Gen1</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>Nested</td><td>L</td><td>14,548.263 &mu;s</td><td>287.4399 &mu;s</td><td>412.2377 &mu;s</td><td>1.00</td><td>0.04</td><td>437.5000</td><td>-</td><td>1814.38 KB</td><td>1.00</td>
+</tr><tr><td>Lookup</td><td>L</td><td>512.806 &mu;s</td><td>9.1564 &mu;s</td><td>10.5445 &mu;s</td><td>0.04</td><td>0.00</td><td>543.9453</td><td>0.9766</td><td>2223.91 KB</td><td>1.23</td>
+</tr><tr><td>Nested</td><td>M</td><td>2,250.206 &mu;s</td><td>30.8481 &mu;s</td><td>28.8554 &mu;s</td><td>1.00</td><td>0.02</td><td>78.1250</td><td>-</td><td>332.51 KB</td><td>1.00</td>
+</tr><tr><td>Lookup</td><td>M</td><td>104.998 &mu;s</td><td>2.0848 &mu;s</td><td>2.4818 &mu;s</td><td>0.05</td><td>0.00</td><td>100.5859</td><td>-</td><td>411.08 KB</td><td>1.24</td>
+</tr><tr><td>Nested</td><td>S</td><td>28.430 &mu;s</td><td>0.3772 &mu;s</td><td>0.2945 &mu;s</td><td>1.00</td><td>0.01</td><td>6.4697</td><td>-</td><td>26.45 KB</td><td>1.00</td>
+</tr><tr><td>Lookup</td><td>S</td><td>7.179 &mu;s</td><td>0.1397 &mu;s</td><td>0.1238 &mu;s</td><td>0.25</td><td>0.00</td><td>7.2098</td><td>-</td><td>29.47 KB</td><td>1.11</td>
+</tr><tr><td>Nested</td><td>XL</td><td>72,191.310 &mu;s</td><td>1,259.5739 &mu;s</td><td>1,237.0700 &mu;s</td><td>1.00</td><td>0.02</td><td>1714.2857</td><td>-</td><td>7164.29 KB</td><td>1.00</td>
+</tr><tr><td>Lookup</td><td>XL</td><td>2,084.602 &mu;s</td><td>25.8093 &mu;s</td><td>24.1420 &mu;s</td><td>0.03</td><td>0.00</td><td>2164.0625</td><td>3.9063</td><td>8852.83 KB</td><td>1.24</td>
+</tr><tr><td>Nested</td><td>XXL</td><td>243,125.760 &mu;s</td><td>4,417.7081 &mu;s</td><td>6,877.8398 &mu;s</td><td>1.00</td><td>0.04</td><td>6500.0000</td><td>-</td><td>27353.62 KB</td><td>1.00</td>
+</tr><tr><td>Lookup</td><td>XXL</td><td>8,869.961 &mu;s</td><td>175.3023 &mu;s</td><td>136.8645 &mu;s</td><td>0.04</td><td>0.00</td><td>8312.5000</td><td>15.6250</td><td>33981.02 KB</td><td>1.24</td>
+</tr></tbody></table>
+</body>
+</html>

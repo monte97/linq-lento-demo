@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>LinqDeepDive.Benchmarks.Benchmarks.AsParallelBenchmark-20261028-160547</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.8, Linux Debian GNU/Linux 12 (bookworm) (container)
+-
+.NET SDK 8.0.427
+  [Host]     : .NET 8.0.33 (8.0.33, 8.0.3326.52219), Arm64 RyuJIT armv8.0-a
+  DefaultJob : .NET 8.0.33 (8.0.33, 8.0.3326.52219), Arm64 RyuJIT armv8.0-a
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>Method     </th><th>Scale</th><th>Mean </th><th>Error</th><th>StdDev</th><th>Median</th><th>Ratio</th><th>RatioSD</th><th>Gen0</th><th>Gen1</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>SequentialNesting</td><td>L</td><td>912.53 &mu;s</td><td>17.209 &mu;s</td><td>15.256 &mu;s</td><td>909.32 &mu;s</td><td>1.00</td><td>0.02</td><td>578.1250</td><td>31.2500</td><td>2362.25 KB</td><td>1.00</td>
+</tr><tr><td>ParallelNesting</td><td>L</td><td>713.48 &mu;s</td><td>57.265 &mu;s</td><td>166.136 &mu;s</td><td>618.28 &mu;s</td><td>0.78</td><td>0.18</td><td>583.9844</td><td>82.0313</td><td>2381.99 KB</td><td>1.01</td>
+</tr><tr><td>SequentialNesting</td><td>M</td><td>278.97 &mu;s</td><td>34.110 &mu;s</td><td>97.868 &mu;s</td><td>252.73 &mu;s</td><td>1.11</td><td>0.52</td><td>106.6895</td><td>0.4883</td><td>435.73 KB</td><td>1.00</td>
+</tr><tr><td>ParallelNesting</td><td>M</td><td>182.06 &mu;s</td><td>8.720 &mu;s</td><td>24.019 &mu;s</td><td>171.74 &mu;s</td><td>0.72</td><td>0.23</td><td>110.3516</td><td>-</td><td>449.42 KB</td><td>1.03</td>
+</tr><tr><td>SequentialNesting</td><td>S</td><td>11.72 &mu;s</td><td>0.369 &mu;s</td><td>1.027 &mu;s</td><td>11.34 &mu;s</td><td>1.01</td><td>0.12</td><td>7.7515</td><td>-</td><td>31.72 KB</td><td>1.00</td>
+</tr><tr><td>ParallelNesting</td><td>S</td><td>30.77 &mu;s</td><td>1.155 &mu;s</td><td>3.370 &mu;s</td><td>31.38 &mu;s</td><td>2.64</td><td>0.36</td><td>9.9487</td><td>-</td><td>40.45 KB</td><td>1.28</td>
+</tr><tr><td>SequentialNesting</td><td>XL</td><td>4,205.51 &mu;s</td><td>289.997 &mu;s</td><td>822.672 &mu;s</td><td>3,986.03 &mu;s</td><td>1.03</td><td>0.27</td><td>2304.6875</td><td>7.8125</td><td>9423.4 KB</td><td>1.00</td>
+</tr><tr><td>ParallelNesting</td><td>XL</td><td>2,665.59 &mu;s</td><td>176.912 &mu;s</td><td>513.254 &mu;s</td><td>2,435.96 &mu;s</td><td>0.65</td><td>0.17</td><td>2312.5000</td><td>-</td><td>9457.74 KB</td><td>1.00</td>
+</tr></tbody></table>
+</body>
+</html>
