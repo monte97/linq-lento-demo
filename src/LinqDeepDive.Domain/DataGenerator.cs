@@ -13,8 +13,15 @@ public enum FleetSize
 /// <summary>
 /// Parametri espliciti del generatore. Le taglie storiche della demo (Small, Medium, Large)
 /// hanno sempre 20 zone; per far crescere anche le zone si usa questo record.
+///
+/// BlockedShare (default null = comportamento storico). Con il generatore storico i vincoli
+/// sono pescati a caso sulle combinazioni zona x tipo di veicolo x fascia (20 x 3 x 5 = 300):
+/// con 2.000 vincoli quasi ogni combinazione e' bloccata e il dispatcher produce 0 assegnamenti.
+/// Con BlockedShare = 0.7 solo il 70% delle combinazioni puo' ricevere vincoli (scelte con il seed);
+/// i vincoli restano quanti richiesti, ripetuti con motivi diversi sulle stesse combinazioni,
+/// e il 30% delle combinazioni resta libero: i veicoli disponibili trovano consegne assegnabili.
 /// </summary>
-public record FleetOptions(int Vehicles, int Deliveries, int Restrictions, int Zones = 20, int Seed = 42)
+public record FleetOptions(int Vehicles, int Deliveries, int Restrictions, int Zones = 20, int Seed = 42, double? BlockedShare = null)
 {
     public static FleetOptions From(FleetSize size, int seed = 42) => size switch
     {
@@ -25,7 +32,7 @@ public record FleetOptions(int Vehicles, int Deliveries, int Restrictions, int Z
     };
 
     public override string ToString() =>
-        $"{Vehicles}v/{Deliveries}d/{Restrictions}r/{Zones}z";
+        $"{Vehicles}v/{Deliveries}d/{Restrictions}r/{Zones}z" + (BlockedShare is { } b ? $"/blocked{b:0.##}" : "");
 }
 
 public record FleetData(
@@ -162,9 +169,33 @@ public static class DataGenerator
                 Reason: f.PickRandom(RestrictionReasons)
             ));
 
-        var restrictions = restrictionFaker.Generate(restrictionCount);
+        // Profilo con assegnamenti: i vincoli cadono solo su una quota delle combinazioni.
+        // Il sorteggio usa un Random a parte (seed derivato), cosi' i dati generati sopra
+        // restano identici a quelli del profilo storico.
+        var restrictions = options.BlockedShare is { } share
+            ? GenerateRestrictionsOnShare(options, zoneIds, share)
+            : restrictionFaker.Generate(restrictionCount);
 
         return new FleetData(vehicles, drivers, deliveries, zones, restrictions);
+    }
+
+    private static List<Restriction> GenerateRestrictionsOnShare(
+        FleetOptions options, List<string> zoneIds, double share)
+    {
+        if (share is < 0 or > 1) throw new ArgumentOutOfRangeException(nameof(share));
+        var rnd = new Random(options.Seed ^ 0x5EED);
+        var combos = (from z in zoneIds
+                      from t in VehicleTypes
+                      from s in StandardSlots
+                      select (Zone: z, Type: t, Slot: s)).ToList();
+        var blockedCount = Math.Max(1, (int)Math.Round(combos.Count * share));
+        var blocked = combos.OrderBy(_ => rnd.Next()).Take(blockedCount).ToList();
+        var id = 0;
+        return Enumerable.Range(0, options.Restrictions).Select(_ =>
+        {
+            var c = blocked[rnd.Next(blocked.Count)];
+            return new Restriction(++id, c.Zone, c.Type, c.Slot, RestrictionReasons[rnd.Next(RestrictionReasons.Length)]);
+        }).ToList();
     }
 
     private static List<Zone> GenerateZones(int count)

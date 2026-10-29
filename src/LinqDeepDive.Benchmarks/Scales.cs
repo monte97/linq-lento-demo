@@ -23,5 +23,10 @@ public static class Scales
         ["XL15"] = new(1_500, 15_000, 6_000),
     };
 
-    public static FleetOptions Get(string name) => Map[name];
+    /// <summary>Come Map, con suffisso facoltativo "@<percentuale>" (es. "XL12@70") per il profilo con assegnamenti.</summary>
+    public static FleetOptions Get(string name)
+    {
+        var at = name.IndexOf('@');
+        return at < 0 ? Map[name] : Map[name[..at]] with { BlockedShare = int.Parse(name[(at + 1)..]) / 100.0 };
+    }
 }

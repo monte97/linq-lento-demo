@@ -14,11 +14,24 @@ namespace LinqDeepDive.Demo;
 /// </summary>
 public static class LiveDemo
 {
-    public static FleetOptions ScaleFor(string name) => name switch
+    /// <summary>
+    /// Nome scala, con suffisso facoltativo "@<percentuale>" per il profilo con assegnamenti
+    /// (es. "XL12@70": 70% delle combinazioni zona/tipo/fascia puo' avere vincoli).
+    /// Senza suffisso: dataset storico.
+    /// </summary>
+    public static FleetOptions ScaleFor(string name)
+    {
+        var at = name.IndexOf('@');
+        if (at < 0) return BaseScale(name);
+        return BaseScale(name[..at]) with { BlockedShare = int.Parse(name[(at + 1)..]) / 100.0 };
+    }
+
+    private static FleetOptions BaseScale(string name) => name switch
     {
         "S" => new FleetOptions(50, 200, 100),
         "M" => new FleetOptions(200, 2_000, 1_000),
         "L" => new FleetOptions(500, 5_000, 2_000),
+        "L15" => new FleetOptions(750, 7_500, 3_000),
         "L17" => new FleetOptions(850, 8_500, 3_400),
         "XL" => new FleetOptions(1_000, 10_000, 4_000),
         "XL12" => new FleetOptions(1_200, 12_000, 4_800),

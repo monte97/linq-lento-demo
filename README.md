@@ -80,4 +80,6 @@ L'immagine `grafana/otel-lgtm` e' pensata per sviluppo e demo. Il tracing non e'
 
 ## Note sul dataset
 
-Con i vincoli di `FleetData` (2.000 vincoli su 20 zone x 3 tipi x 5 fasce) quasi ogni fascia risulta bloccata: gli assegnamenti validi della demo originale sono pochi o zero alle taglie alte. Vedi il riassunto delle misure.
+Con i vincoli di `FleetData` (2.000 vincoli su 20 zone x 3 tipi x 5 fasce) quasi ogni combinazione risulta bloccata: gli assegnamenti del dispatcher sono 0 alle taglie L e oltre. Il comportamento di default non cambia.
+
+Profilo con assegnamenti (opzionale): `FleetOptions.BlockedShare` (es. `0.7`) limita i vincoli al 70% delle 300 combinazioni zona/tipo/fascia, ripetendoli con motivi diversi; il resto resta libero. Dalla console e dai benchmark si usa il suffisso `@<percentuale>` sul nome della scala (`--dispatch XL12@70 --prima`, `Scales.Get("XL12@70")`). Benchmark: `DispatchOpenSlotsBenchmark`. Numeri: `linq-lento-talk/docs/misure/2026-10-29-dataset-con-assegnamenti.md`.
