@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>LinqDeepDive.Benchmarks.Benchmarks.AllocationsVsForeachBenchmark-20261113-135331</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.8, Linux Debian GNU/Linux 12 (bookworm) (container)
+-
+.NET SDK 8.0.428
+  [Host] : .NET 8.0.34 (8.0.34, 8.0.3426.52217), Arm64 RyuJIT armv8.0-a
+</code></pre>
+<pre><code>Toolchain=InProcessEmitToolchain  
+</code></pre>
+
+<table>
+<thead><tr><th>Method      </th><th>Categories</th><th>Scale</th><th>Mean   </th><th>Error  </th><th>StdDev </th><th>Median </th><th>Ratio</th><th>RatioSD</th><th>Gen0</th><th>Gen1</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>CountGreaterZero</td><td>Exists</td><td>L</td><td>125,629.28 ns</td><td>2,428.608 ns</td><td>3,242.122 ns</td><td>125,095.56 ns</td><td>1.001</td><td>0.04</td><td>35.8887</td><td>-</td><td>150232 B</td><td>1.000</td>
+</tr><tr><td>AnyEarlyExit</td><td>Exists</td><td>L</td><td>30.56 ns</td><td>0.616 ns</td><td>0.863 ns</td><td>30.32 ns</td><td>0.000</td><td>0.00</td><td>0.0191</td><td>-</td><td>80 B</td><td>0.001</td>
+</tr><tr><td>CountGreaterZero</td><td>Exists</td><td>M</td><td>49,262.36 ns</td><td>974.608 ns</td><td>2,316.260 ns</td><td>48,770.54 ns</td><td>1.002</td><td>0.07</td><td>14.4043</td><td>-</td><td>60312 B</td><td>1.000</td>
+</tr><tr><td>AnyEarlyExit</td><td>Exists</td><td>M</td><td>153.23 ns</td><td>3.012 ns</td><td>4.123 ns</td><td>152.78 ns</td><td>0.003</td><td>0.00</td><td>0.0572</td><td>-</td><td>240 B</td><td>0.004</td>
+</tr><tr><td>CountGreaterZero</td><td>Exists</td><td>S</td><td>3,848.54 ns</td><td>76.842 ns</td><td>170.277 ns</td><td>3,767.83 ns</td><td>1.00</td><td>0.06</td><td>1.5068</td><td>-</td><td>6312 B</td><td>1.00</td>
+</tr><tr><td>AnyEarlyExit</td><td>Exists</td><td>S</td><td>89.88 ns</td><td>1.269 ns</td><td>1.604 ns</td><td>90.04 ns</td><td>0.02</td><td>0.00</td><td>0.0381</td><td>-</td><td>160 B</td><td>0.03</td>
+</tr><tr><td>CountGreaterZero</td><td>Exists</td><td>XL</td><td>255,924.26 ns</td><td>5,022.879 ns</td><td>6,705.399 ns</td><td>254,284.41 ns</td><td>1.001</td><td>0.04</td><td>71.7773</td><td>-</td><td>300873 B</td><td>1.000</td>
+</tr><tr><td>AnyEarlyExit</td><td>Exists</td><td>XL</td><td>36.95 ns</td><td>0.752 ns</td><td>1.102 ns</td><td>36.88 ns</td><td>0.000</td><td>0.00</td><td>0.0191</td><td>-</td><td>80 B</td><td>0.000</td>
+</tr><tr><td>OrderByFirst</td><td>Max</td><td>L</td><td>28,720.59 ns</td><td>572.947 ns</td><td>1,634.650 ns</td><td>28,249.94 ns</td><td>1.00</td><td>0.08</td><td>0.0305</td><td>-</td><td>176 B</td><td>1.00</td>
+</tr><tr><td>MaxByLinear</td><td>Max</td><td>L</td><td>33,336.52 ns</td><td>735.082 ns</td><td>2,144.268 ns</td><td>32,593.06 ns</td><td>1.16</td><td>0.10</td><td>-</td><td>-</td><td>72 B</td><td>0.41</td>
+</tr><tr><td>OrderByFirst</td><td>Max</td><td>M</td><td>10,527.97 ns</td><td>208.997 ns</td><td>392.547 ns</td><td>10,419.21 ns</td><td>1.00</td><td>0.05</td><td>0.0305</td><td>-</td><td>176 B</td><td>1.00</td>
+</tr><tr><td>MaxByLinear</td><td>Max</td><td>M</td><td>12,857.82 ns</td><td>395.404 ns</td><td>1,134.489 ns</td><td>12,355.34 ns</td><td>1.22</td><td>0.12</td><td>0.0153</td><td>-</td><td>72 B</td><td>0.41</td>
+</tr><tr><td>OrderByFirst</td><td>Max</td><td>S</td><td>799.29 ns</td><td>22.869 ns</td><td>64.502 ns</td><td>780.13 ns</td><td>1.01</td><td>0.11</td><td>0.0420</td><td>-</td><td>176 B</td><td>1.00</td>
+</tr><tr><td>MaxByLinear</td><td>Max</td><td>S</td><td>1,038.10 ns</td><td>20.679 ns</td><td>26.153 ns</td><td>1,026.80 ns</td><td>1.31</td><td>0.10</td><td>0.0172</td><td>-</td><td>72 B</td><td>0.41</td>
+</tr><tr><td>OrderByFirst</td><td>Max</td><td>XL</td><td>56,014.62 ns</td><td>467.217 ns</td><td>390.147 ns</td><td>56,166.80 ns</td><td>1.00</td><td>0.01</td><td>-</td><td>-</td><td>176 B</td><td>1.00</td>
+</tr><tr><td>MaxByLinear</td><td>Max</td><td>XL</td><td>67,355.56 ns</td><td>1,958.605 ns</td><td>5,556.237 ns</td><td>65,267.86 ns</td><td>1.20</td><td>0.10</td><td>-</td><td>-</td><td>72 B</td><td>0.41</td>
+</tr><tr><td>IntermediateToList</td><td>Pipeline</td><td>L</td><td>60,485.46 ns</td><td>1,204.643 ns</td><td>1,566.377 ns</td><td>59,782.85 ns</td><td>1.00</td><td>0.04</td><td>24.9634</td><td>-</td><td>104608 B</td><td>1.00</td>
+</tr><tr><td>LazyPipeline</td><td>Pipeline</td><td>L</td><td>46,536.83 ns</td><td>923.933 ns</td><td>2,104.262 ns</td><td>45,697.30 ns</td><td>0.77</td><td>0.04</td><td>7.3242</td><td>-</td><td>30888 B</td><td>0.30</td>
+</tr><tr><td>IntermediateToList</td><td>Pipeline</td><td>M</td><td>25,059.74 ns</td><td>1,015.915 ns</td><td>2,947.355 ns</td><td>23,930.77 ns</td><td>1.01</td><td>0.16</td><td>12.0239</td><td>-</td><td>50328 B</td><td>1.00</td>
+</tr><tr><td>LazyPipeline</td><td>Pipeline</td><td>M</td><td>15,856.52 ns</td><td>281.611 ns</td><td>263.419 ns</td><td>15,820.88 ns</td><td>0.64</td><td>0.07</td><td>3.2043</td><td>-</td><td>13496 B</td><td>0.27</td>
+</tr><tr><td>IntermediateToList</td><td>Pipeline</td><td>S</td><td>3,306.68 ns</td><td>350.568 ns</td><td>1,033.656 ns</td><td>2,857.53 ns</td><td>1.10</td><td>0.48</td><td>1.4839</td><td>-</td><td>6216 B</td><td>1.00</td>
+</tr><tr><td>LazyPipeline</td><td>Pipeline</td><td>S</td><td>2,933.33 ns</td><td>150.949 ns</td><td>425.754 ns</td><td>2,956.27 ns</td><td>0.97</td><td>0.32</td><td>0.4463</td><td>-</td><td>1880 B</td><td>0.30</td>
+</tr><tr><td>IntermediateToList</td><td>Pipeline</td><td>XL</td><td>363,263.06 ns</td><td>13,994.895 ns</td><td>40,601.731 ns</td><td>361,918.62 ns</td><td>1.02</td><td>0.20</td><td>49.8047</td><td>4.8828</td><td>209448 B</td><td>1.00</td>
+</tr><tr><td>LazyPipeline</td><td>Pipeline</td><td>XL</td><td>253,140.63 ns</td><td>12,931.062 ns</td><td>38,127.530 ns</td><td>254,808.72 ns</td><td>0.71</td><td>0.16</td><td>14.6484</td><td>-</td><td>61976 B</td><td>0.30</td>
+</tr></tbody></table>
+</body>
+</html>
