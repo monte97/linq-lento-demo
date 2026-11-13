@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Uso: scripts/run-docker.sh <8|10> "<filtro BenchmarkDotNet>" <nome-cartella-output> [argomenti extra BDN...]
+# Uso: scripts/run-docker.sh <8|10|11> "<filtro BenchmarkDotNet>" <nome-cartella-output> [argomenti extra BDN...]
 # Esegue BenchmarkDotNet in Release dentro mcr.microsoft.com/dotnet/sdk:<versione>.
 # Stessi limiti per entrambe le versioni: CPUS e MEM (default 4 CPU, 8g).
 # Sorgenti montati in sola lettura e copiati nel container; risultati in results/net<versione>/<nome>.
