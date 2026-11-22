@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>LinqDeepDive.Benchmarks.Benchmarks.ListVsHashSetBenchmark-20261122-222035</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.8, Windows 11 (10.0.26100.33828/24H2/2024Update/HudsonValley) (Hyper-V)
+AMD EPYC 7763 2.44GHz, 1 CPU, 4 logical and 2 physical cores
+.NET SDK 11.0.100
+  [Host] : .NET 11.0.0 (11.0.0, 11.0.26.53018), X64 RyuJIT x86-64-v3
+</code></pre>
+<pre><code>Toolchain=InProcessEmitToolchain  
+</code></pre>
+
+<table>
+<thead><tr><th>Method     </th><th>Categories</th><th>VehicleCount</th><th>ZoneCount</th><th>Mean  </th><th>Error</th><th>StdDev</th><th>Ratio</th><th>Gen0</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>ListCount</td><td>Count</td><td>500</td><td>20</td><td>12.625 &mu;s</td><td>0.1506 &mu;s</td><td>0.1335 &mu;s</td><td>1.00</td><td>-</td><td>-</td><td>NA</td>
+</tr><tr><td>HashSetCount</td><td>Count</td><td>500</td><td>20</td><td>4.084 &mu;s</td><td>0.0402 &mu;s</td><td>0.0376 &mu;s</td><td>0.32</td><td>-</td><td>-</td><td>NA</td>
+</tr><tr><td>ListCount</td><td>Count</td><td>500</td><td>150</td><td>79.521 &mu;s</td><td>0.5357 &mu;s</td><td>0.4749 &mu;s</td><td>1.00</td><td>-</td><td>-</td><td>NA</td>
+</tr><tr><td>HashSetCount</td><td>Count</td><td>500</td><td>150</td><td>4.310 &mu;s</td><td>0.0273 &mu;s</td><td>0.0242 &mu;s</td><td>0.05</td><td>-</td><td>-</td><td>NA</td>
+</tr><tr><td>ListCount</td><td>Count</td><td>500</td><td>700</td><td>364.634 &mu;s</td><td>1.9372 &mu;s</td><td>1.7173 &mu;s</td><td>1.00</td><td>-</td><td>-</td><td>NA</td>
+</tr><tr><td>HashSetCount</td><td>Count</td><td>500</td><td>700</td><td>4.579 &mu;s</td><td>0.0290 &mu;s</td><td>0.0271 &mu;s</td><td>0.01</td><td>-</td><td>-</td><td>NA</td>
+</tr><tr><td>ListCount</td><td>Count</td><td>5000</td><td>20</td><td>130.126 &mu;s</td><td>0.8907 &mu;s</td><td>0.8332 &mu;s</td><td>1.00</td><td>-</td><td>-</td><td>NA</td>
+</tr><tr><td>HashSetCount</td><td>Count</td><td>5000</td><td>20</td><td>43.556 &mu;s</td><td>0.2045 &mu;s</td><td>0.1813 &mu;s</td><td>0.33</td><td>-</td><td>-</td><td>NA</td>
+</tr><tr><td>ListCount</td><td>Count</td><td>5000</td><td>150</td><td>794.002 &mu;s</td><td>7.7660 &mu;s</td><td>7.2643 &mu;s</td><td>1.00</td><td>-</td><td>-</td><td>NA</td>
+</tr><tr><td>HashSetCount</td><td>Count</td><td>5000</td><td>150</td><td>46.856 &mu;s</td><td>0.2534 &mu;s</td><td>0.2246 &mu;s</td><td>0.06</td><td>-</td><td>-</td><td>NA</td>
+</tr><tr><td>ListCount</td><td>Count</td><td>5000</td><td>700</td><td>3,640.993 &mu;s</td><td>34.2766 &mu;s</td><td>32.0623 &mu;s</td><td>1.00</td><td>-</td><td>-</td><td>NA</td>
+</tr><tr><td>HashSetCount</td><td>Count</td><td>5000</td><td>700</td><td>58.171 &mu;s</td><td>0.4109 &mu;s</td><td>0.3844 &mu;s</td><td>0.02</td><td>-</td><td>-</td><td>NA</td>
+</tr><tr><td>ListContains</td><td>ToList</td><td>500</td><td>20</td><td>14.439 &mu;s</td><td>0.0241 &mu;s</td><td>0.0188 &mu;s</td><td>1.00</td><td>0.0763</td><td>1376 B</td><td>1.00</td>
+</tr><tr><td>HashSetContains</td><td>ToList</td><td>500</td><td>20</td><td>5.188 &mu;s</td><td>0.0300 &mu;s</td><td>0.0266 &mu;s</td><td>0.36</td><td>0.0763</td><td>1376 B</td><td>1.00</td>
+</tr><tr><td>FrozenSetContains</td><td>ToList</td><td>500</td><td>20</td><td>5.835 &mu;s</td><td>0.0398 &mu;s</td><td>0.0372 &mu;s</td><td>0.40</td><td>0.0763</td><td>1376 B</td><td>1.00</td>
+</tr><tr><td>ListContains</td><td>ToList</td><td>500</td><td>150</td><td>88.326 &mu;s</td><td>0.9316 &mu;s</td><td>0.8258 &mu;s</td><td>1.00</td><td>-</td><td>1337 B</td><td>1.00</td>
+</tr><tr><td>HashSetContains</td><td>ToList</td><td>500</td><td>150</td><td>5.378 &mu;s</td><td>0.0264 &mu;s</td><td>0.0221 &mu;s</td><td>0.06</td><td>0.0763</td><td>1336 B</td><td>1.00</td>
+</tr><tr><td>FrozenSetContains</td><td>ToList</td><td>500</td><td>150</td><td>6.015 &mu;s</td><td>0.0342 &mu;s</td><td>0.0320 &mu;s</td><td>0.07</td><td>0.0763</td><td>1336 B</td><td>1.00</td>
+</tr><tr><td>ListContains</td><td>ToList</td><td>500</td><td>700</td><td>397.756 &mu;s</td><td>3.4163 &mu;s</td><td>3.1956 &mu;s</td><td>1.00</td><td>-</td><td>1347 B</td><td>1.00</td>
+</tr><tr><td>HashSetContains</td><td>ToList</td><td>500</td><td>700</td><td>5.412 &mu;s</td><td>0.0360 &mu;s</td><td>0.0337 &mu;s</td><td>0.01</td><td>0.0763</td><td>1344 B</td><td>1.00</td>
+</tr><tr><td>FrozenSetContains</td><td>ToList</td><td>500</td><td>700</td><td>6.317 &mu;s</td><td>0.0589 &mu;s</td><td>0.0551 &mu;s</td><td>0.02</td><td>0.0763</td><td>1344 B</td><td>1.00</td>
+</tr><tr><td>ListContains</td><td>ToList</td><td>5000</td><td>20</td><td>151.668 &mu;s</td><td>1.7115 &mu;s</td><td>1.6009 &mu;s</td><td>1.00</td><td>0.7324</td><td>13601 B</td><td>1.00</td>
+</tr><tr><td>HashSetContains</td><td>ToList</td><td>5000</td><td>20</td><td>77.757 &mu;s</td><td>1.0485 &mu;s</td><td>0.9807 &mu;s</td><td>0.51</td><td>0.7324</td><td>13601 B</td><td>1.00</td>
+</tr><tr><td>FrozenSetContains</td><td>ToList</td><td>5000</td><td>20</td><td>81.358 &mu;s</td><td>0.5310 &mu;s</td><td>0.4967 &mu;s</td><td>0.54</td><td>0.7324</td><td>13601 B</td><td>1.00</td>
+</tr><tr><td>ListContains</td><td>ToList</td><td>5000</td><td>150</td><td>875.135 &mu;s</td><td>4.9122 &mu;s</td><td>4.5949 &mu;s</td><td>1.00</td><td>-</td><td>12654 B</td><td>1.00</td>
+</tr><tr><td>HashSetContains</td><td>ToList</td><td>5000</td><td>150</td><td>79.370 &mu;s</td><td>1.5678 &mu;s</td><td>1.9254 &mu;s</td><td>0.09</td><td>0.7324</td><td>12649 B</td><td>1.00</td>
+</tr><tr><td>FrozenSetContains</td><td>ToList</td><td>5000</td><td>150</td><td>83.458 &mu;s</td><td>0.3815 &mu;s</td><td>0.3382 &mu;s</td><td>0.10</td><td>0.7324</td><td>12649 B</td><td>1.00</td>
+</tr><tr><td>ListContains</td><td>ToList</td><td>5000</td><td>700</td><td>3,951.496 &mu;s</td><td>32.7430 &mu;s</td><td>30.6278 &mu;s</td><td>1.00</td><td>-</td><td>12716 B</td><td>1.00</td>
+</tr><tr><td>HashSetContains</td><td>ToList</td><td>5000</td><td>700</td><td>79.366 &mu;s</td><td>1.0741 &mu;s</td><td>1.0047 &mu;s</td><td>0.02</td><td>0.7324</td><td>12672 B</td><td>1.00</td>
+</tr><tr><td>FrozenSetContains</td><td>ToList</td><td>5000</td><td>700</td><td>89.472 &mu;s</td><td>0.6642 &mu;s</td><td>0.6213 &mu;s</td><td>0.02</td><td>0.7324</td><td>12673 B</td><td>1.00</td>
+</tr></tbody></table>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>LinqDeepDive.Benchmarks.Benchmarks.ScanVsGroupByBenchmark-20261122-213340</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.8, Windows 11 (10.0.26100.33828/24H2/2024Update/HudsonValley) (Hyper-V)
+AMD EPYC 9V74 2.60GHz, 1 CPU, 4 logical and 2 physical cores
+.NET SDK 11.0.100
+  [Host] : .NET 10.0.15 (10.0.15, 10.0.1526.53008), X64 RyuJIT x86-64-v4
+</code></pre>
+<pre><code>Toolchain=InProcessEmitToolchain  
+</code></pre>
+
+<table>
+<thead><tr><th>Method     </th><th>ZoneCount</th><th>DeliveryCount</th><th>Mean     </th><th>Error  </th><th>StdDev </th><th>Ratio</th><th>RatioSD</th><th>Gen0</th><th>Gen1</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>RepeatedScan</td><td>20</td><td>2000</td><td>152.05 &mu;s</td><td>1.091 &mu;s</td><td>1.021 &mu;s</td><td>1.00</td><td>0.01</td><td>-</td><td>-</td><td>2.23 KB</td><td>1.00</td>
+</tr><tr><td>GroupByDictionary</td><td>20</td><td>2000</td><td>22.23 &mu;s</td><td>0.120 &mu;s</td><td>0.106 &mu;s</td><td>0.15</td><td>0.00</td><td>0.9155</td><td>-</td><td>15.34 KB</td><td>6.89</td>
+</tr><tr><td>RepeatedScan</td><td>20</td><td>20000</td><td>2,346.88 &mu;s</td><td>20.530 &mu;s</td><td>19.204 &mu;s</td><td>1.00</td><td>0.01</td><td>-</td><td>-</td><td>2.24 KB</td><td>1.00</td>
+</tr><tr><td>GroupByDictionary</td><td>20</td><td>20000</td><td>249.39 &mu;s</td><td>1.311 &mu;s</td><td>1.162 &mu;s</td><td>0.11</td><td>0.00</td><td>5.3711</td><td>0.4883</td><td>88.39 KB</td><td>39.39</td>
+</tr><tr><td>RepeatedScan</td><td>20</td><td>100000</td><td>14,037.94 &mu;s</td><td>274.676 &mu;s</td><td>443.550 &mu;s</td><td>1.00</td><td>0.04</td><td>-</td><td>-</td><td>2.31 KB</td><td>1.00</td>
+</tr><tr><td>GroupByDictionary</td><td>20</td><td>100000</td><td>1,637.94 &mu;s</td><td>29.292 &mu;s</td><td>41.063 &mu;s</td><td>0.12</td><td>0.00</td><td>23.4375</td><td>7.8125</td><td>393.43 KB</td><td>170.49</td>
+</tr><tr><td>RepeatedScan</td><td>200</td><td>2000</td><td>1,589.83 &mu;s</td><td>14.238 &mu;s</td><td>13.318 &mu;s</td><td>1.00</td><td>0.01</td><td>-</td><td>-</td><td>20.52 KB</td><td>1.00</td>
+</tr><tr><td>GroupByDictionary</td><td>200</td><td>2000</td><td>38.29 &mu;s</td><td>0.432 &mu;s</td><td>0.404 &mu;s</td><td>0.02</td><td>0.00</td><td>2.4414</td><td>0.1831</td><td>40.71 KB</td><td>1.98</td>
+</tr><tr><td>RepeatedScan</td><td>200</td><td>20000</td><td>22,062.17 &mu;s</td><td>236.553 &mu;s</td><td>209.698 &mu;s</td><td>1.00</td><td>0.01</td><td>-</td><td>-</td><td>20.52 KB</td><td>1.00</td>
+</tr><tr><td>GroupByDictionary</td><td>200</td><td>20000</td><td>305.62 &mu;s</td><td>2.569 &mu;s</td><td>2.403 &mu;s</td><td>0.01</td><td>0.00</td><td>9.2773</td><td>1.4648</td><td>153.43 KB</td><td>7.48</td>
+</tr><tr><td>RepeatedScan</td><td>200</td><td>100000</td><td>126,638.85 &mu;s</td><td>2,225.024 &mu;s</td><td>3,191.063 &mu;s</td><td>1.00</td><td>0.03</td><td>-</td><td>-</td><td>21.49 KB</td><td>1.00</td>
+</tr><tr><td>GroupByDictionary</td><td>200</td><td>100000</td><td>1,961.99 &mu;s</td><td>49.548 &mu;s</td><td>146.093 &mu;s</td><td>0.02</td><td>0.00</td><td>27.3438</td><td>-</td><td>476.23 KB</td><td>22.16</td>
+</tr><tr><td>RepeatedScan</td><td>2000</td><td>2000</td><td>11,669.99 &mu;s</td><td>94.413 &mu;s</td><td>88.314 &mu;s</td><td>1.000</td><td>0.01</td><td>-</td><td>-</td><td>203.4 KB</td><td>1.00</td>
+</tr><tr><td>GroupByDictionary</td><td>2000</td><td>2000</td><td>73.69 &mu;s</td><td>0.654 &mu;s</td><td>0.612 &mu;s</td><td>0.006</td><td>0.00</td><td>5.6152</td><td>0.6104</td><td>93.24 KB</td><td>0.46</td>
+</tr><tr><td>RepeatedScan</td><td>2000</td><td>20000</td><td>175,879.37 &mu;s</td><td>1,923.022 &mu;s</td><td>1,798.796 &mu;s</td><td>1.000</td><td>0.01</td><td>-</td><td>-</td><td>204.96 KB</td><td>1.00</td>
+</tr><tr><td>GroupByDictionary</td><td>2000</td><td>20000</td><td>585.54 &mu;s</td><td>7.290 &mu;s</td><td>6.462 &mu;s</td><td>0.003</td><td>0.00</td><td>24.4141</td><td>7.8125</td><td>403.04 KB</td><td>1.97</td>
+</tr><tr><td>RepeatedScan</td><td>2000</td><td>100000</td><td>1,956,823.76 &mu;s</td><td>12,975.967 &mu;s</td><td>11,502.857 &mu;s</td><td>1.000</td><td>0.01</td><td>-</td><td>-</td><td>206.23 KB</td><td>1.00</td>
+</tr><tr><td>GroupByDictionary</td><td>2000</td><td>100000</td><td>3,826.18 &mu;s</td><td>173.262 &mu;s</td><td>510.867 &mu;s</td><td>0.002</td><td>0.00</td><td>54.6875</td><td>19.5313</td><td>1016.85 KB</td><td>4.93</td>
+</tr></tbody></table>
+</body>
+</html>

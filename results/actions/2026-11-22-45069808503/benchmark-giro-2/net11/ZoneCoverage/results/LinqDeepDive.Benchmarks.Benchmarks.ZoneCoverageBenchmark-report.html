@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>LinqDeepDive.Benchmarks.Benchmarks.ZoneCoverageBenchmark-20261122-232051</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.8, Windows 11 (10.0.26100.33828/24H2/2024Update/HudsonValley) (Hyper-V)
+AMD EPYC 9V74 2.60GHz, 1 CPU, 4 logical and 2 physical cores
+.NET SDK 11.0.100
+  [Host] : .NET 11.0.0 (11.0.0, 11.0.26.53018), X64 RyuJIT x86-64-v4
+</code></pre>
+<pre><code>Toolchain=InProcessEmitToolchain  
+</code></pre>
+
+<table>
+<thead><tr><th>Method  </th><th>Zones</th><th>Scale</th><th>Mean </th><th>Error</th><th>StdDev</th><th>Ratio</th><th>RatioSD</th><th>Gen0</th><th>Gen1</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>Classic</td><td>20</td><td>L</td><td>74.25 &mu;s</td><td>0.569 &mu;s</td><td>0.504 &mu;s</td><td>1.00</td><td>0.01</td><td>2.8076</td><td>-</td><td>46.67 KB</td><td>1.00</td>
+</tr><tr><td>ClassicHashSet</td><td>20</td><td>L</td><td>85.10 &mu;s</td><td>0.615 &mu;s</td><td>0.575 &mu;s</td><td>1.15</td><td>0.01</td><td>2.8076</td><td>0.1221</td><td>46.7 KB</td><td>1.00</td>
+</tr><tr><td>Modern</td><td>20</td><td>L</td><td>47.97 &mu;s</td><td>0.293 &mu;s</td><td>0.274 &mu;s</td><td>0.65</td><td>0.01</td><td>0.6104</td><td>-</td><td>10.14 KB</td><td>0.22</td>
+</tr><tr><td>Classic</td><td>20</td><td>XXL</td><td>305.55 &mu;s</td><td>2.455 &mu;s</td><td>2.050 &mu;s</td><td>1.00</td><td>0.01</td><td>8.3008</td><td>0.9766</td><td>137.34 KB</td><td>1.00</td>
+</tr><tr><td>ClassicHashSet</td><td>20</td><td>XXL</td><td>346.33 &mu;s</td><td>2.858 &mu;s</td><td>2.534 &mu;s</td><td>1.13</td><td>0.01</td><td>8.3008</td><td>0.4883</td><td>137.36 KB</td><td>1.00</td>
+</tr><tr><td>Modern</td><td>20</td><td>XXL</td><td>196.23 &mu;s</td><td>2.489 &mu;s</td><td>2.328 &mu;s</td><td>0.64</td><td>0.01</td><td>0.4883</td><td>-</td><td>10.14 KB</td><td>0.07</td>
+</tr><tr><td>Classic</td><td>2000</td><td>L</td><td>934.33 &mu;s</td><td>2.777 &mu;s</td><td>2.319 &mu;s</td><td>1.00</td><td>0.00</td><td>21.4844</td><td>4.8828</td><td>362.51 KB</td><td>1.00</td>
+</tr><tr><td>ClassicHashSet</td><td>2000</td><td>L</td><td>412.00 &mu;s</td><td>3.964 &mu;s</td><td>3.514 &mu;s</td><td>0.44</td><td>0.00</td><td>22.4609</td><td>4.3945</td><td>369.61 KB</td><td>1.02</td>
+</tr><tr><td>Modern</td><td>2000</td><td>L</td><td>256.76 &mu;s</td><td>3.569 &mu;s</td><td>3.338 &mu;s</td><td>0.27</td><td>0.00</td><td>10.2539</td><td>1.4648</td><td>173.66 KB</td><td>0.48</td>
+</tr><tr><td>Classic</td><td>2000</td><td>XXL</td><td>3,848.15 &mu;s</td><td>60.226 &mu;s</td><td>47.020 &mu;s</td><td>1.00</td><td>0.02</td><td>58.5938</td><td>15.6250</td><td>995.74 KB</td><td>1.00</td>
+</tr><tr><td>ClassicHashSet</td><td>2000</td><td>XXL</td><td>1,413.53 &mu;s</td><td>21.322 &mu;s</td><td>19.944 &mu;s</td><td>0.37</td><td>0.01</td><td>58.5938</td><td>23.4375</td><td>986.78 KB</td><td>0.99</td>
+</tr><tr><td>Modern</td><td>2000</td><td>XXL</td><td>979.93 &mu;s</td><td>5.228 &mu;s</td><td>4.365 &mu;s</td><td>0.25</td><td>0.00</td><td>27.3438</td><td>7.8125</td><td>469.65 KB</td><td>0.47</td>
+</tr></tbody></table>
+</body>
+</html>

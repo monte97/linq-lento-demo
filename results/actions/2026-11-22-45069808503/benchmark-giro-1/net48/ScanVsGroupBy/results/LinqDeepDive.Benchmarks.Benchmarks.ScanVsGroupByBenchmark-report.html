@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>LinqDeepDive.Benchmarks.Benchmarks.ScanVsGroupByBenchmark-20261122-211823</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.8, Windows 11 (10.0.26100.33828/24H2/2024Update/HudsonValley) (Hyper-V)
+AMD EPYC 7763 2.45GHz, 1 CPU, 4 logical and 2 physical cores
+  [Host] : .NET Framework 4.8.1 (4.8.9363.0), X64 RyuJIT VectorSize=256
+</code></pre>
+<pre><code>Toolchain=InProcessEmitToolchain  
+</code></pre>
+
+<table>
+<thead><tr><th>Method</th><th>ZoneCount</th><th>DeliveryCount</th><th>Mean    </th><th>Error </th><th>StdDev</th><th>Ratio</th><th>RatioSD</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>RepeatedScan</td><td>20</td><td>2000</td><td>609.2 &mu;s</td><td>5.03 &mu;s</td><td>4.46 &mu;s</td><td>1.00</td><td>0.01</td><td>3.73 KB</td><td>1.00</td>
+</tr><tr><td>RepeatedScan</td><td>20</td><td>20000</td><td>6,561.7 &mu;s</td><td>90.79 &mu;s</td><td>84.92 &mu;s</td><td>1.00</td><td>0.02</td><td>3.69 KB</td><td>1.00</td>
+</tr><tr><td>RepeatedScan</td><td>20</td><td>100000</td><td>35,316.2 &mu;s</td><td>428.08 &mu;s</td><td>400.42 &mu;s</td><td>1.00</td><td>0.02</td><td>3.73 KB</td><td>1.00</td>
+</tr><tr><td>RepeatedScan</td><td>200</td><td>2000</td><td>7,979.9 &mu;s</td><td>103.52 &mu;s</td><td>91.77 &mu;s</td><td>1.00</td><td>0.02</td><td>33.38 KB</td><td>1.00</td>
+</tr><tr><td>RepeatedScan</td><td>200</td><td>20000</td><td>94,184.7 &mu;s</td><td>629.24 &mu;s</td><td>588.59 &mu;s</td><td>1.00</td><td>0.01</td><td>33.33 KB</td><td>1.00</td>
+</tr><tr><td>RepeatedScan</td><td>200</td><td>100000</td><td>496,573.8 &mu;s</td><td>3,109.69 &mu;s</td><td>2,756.66 &mu;s</td><td>1.00</td><td>0.01</td><td>31.8 KB</td><td>1.00</td>
+</tr><tr><td>RepeatedScan</td><td>2000</td><td>2000</td><td>82,214.2 &mu;s</td><td>1,264.75 &mu;s</td><td>1,183.04 &mu;s</td><td>1.00</td><td>0.02</td><td>314.81 KB</td><td>1.00</td>
+</tr><tr><td>RepeatedScan</td><td>2000</td><td>20000</td><td>1,044,738.5 &mu;s</td><td>8,579.08 &mu;s</td><td>8,024.87 &mu;s</td><td>1.00</td><td>0.01</td><td>312.14 KB</td><td>1.00</td>
+</tr><tr><td>RepeatedScan</td><td>2000</td><td>100000</td><td>5,335,540.3 &mu;s</td><td>33,491.04 &mu;s</td><td>29,688.94 &mu;s</td><td>1.00</td><td>0.01</td><td>312.14 KB</td><td>1.00</td>
+</tr></tbody></table>
+</body>
+</html>
