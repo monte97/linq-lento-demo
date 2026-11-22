@@ -1,6 +1,7 @@
 using LinqDeepDive.Api;
 using LinqDeepDive.Api.Coverage;
 using LinqDeepDive.Api.Data;
+using LinqDeepDive.Api.Dispatch;
 using LinqDeepDive.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -41,6 +42,12 @@ app.MapGet("/coverage/modern", async (CaricoDbContext db, CancellationToken canc
 
 app.MapGet("/coverage/db", async (CaricoDbContext db, CancellationToken cancellationToken) =>
     Results.Ok(await ZoneCoverageQueries.DbAsync(db, cancellationToken)));
+
+app.MapGet("/dispatch/before", async (CaricoDbContext db, CancellationToken cancellationToken) =>
+    Results.Ok(await DispatchQueries.BeforeAsync(db, cancellationToken)));
+
+app.MapGet("/dispatch/after", async (CaricoDbContext db, CancellationToken cancellationToken) =>
+    Results.Ok(await DispatchQueries.AfterAsync(db, cancellationToken)));
 
 app.Run();
 

@@ -109,3 +109,13 @@ Report di copertura delle zone, tre varianti con le stesse righe:
 | `GET /coverage/db` | `GroupBy` + `Count` e `FullJoin` su `IQueryable`, tradotti in SQL (`FULL JOIN`) |
 
 EF Core 11 non traduce `CountBy` su `IQueryable`: `/coverage/db` usa `GroupBy` + `Count`, che produce la stessa SQL. Il test di integrazione confronta le tre varianti riga per riga e controlla che la query di `/coverage/db` contenga `FULL JOIN`.
+
+Giro di dispatch end-to-end, le due varianti del Domain sugli stessi dati:
+
+| Endpoint | Come |
+|---|---|
+| `GET /dispatch/before` | tutte e cinque le liste caricate con EF, `Dispatcher.Before` in memoria |
+| `GET /dispatch/after` | tutte e cinque le liste caricate con EF, `Dispatcher.After` in memoria |
+
+I due endpoint restituiscono lo stesso `DispatchResult` (veicoli in zone ristrette, assegnamenti, consegne pendenti, HazMat, consegna piu' pesante). Il test di integrazione usa il profilo `M@70` (con assegnamenti) e verifica che `Before` sui dati in memoria, `Before` e `After` sui dati letti dal database siano uguali.
+
