@@ -84,6 +84,10 @@ jobs:
           CARICO_DOTNET: dotnet
           CARICO_K6: k6
           CARICO_CURL: curl
+          # la bash di Git for Windows riscrive "/coverage/classic" come percorso (C:/Program Files/Git/...)
+          # quando lo passa a un programma nativo: per ENDPOINT e OUT la conversione va spenta
+          MSYS_NO_PATHCONV: "1"
+          MSYS2_ENV_CONV_EXCL: "ENDPOINT;OUT"
           # il PostgreSQL dell'immagine ascolta sulla 5432 (la 5433 è quella del container sul Mac)
           CARICO_CONNECTION: "Host=localhost;Port=5432;Database=linq_carico;Username=linq;Password=linq"
           CARICO_OUT: results/carico/giro-${{ matrix.giro }}
