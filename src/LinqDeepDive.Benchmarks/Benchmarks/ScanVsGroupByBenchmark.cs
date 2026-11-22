@@ -30,6 +30,7 @@ public class ScanVsGroupByBenchmark
             Count: _data.Deliveries.Count(d => d.DestinationZoneId == z.Id && d.Status == DeliveryStatus.Pending)
         )).ToList();
 
+#if !NETFRAMEWORK // .NET Framework 4.8 non ha l'API: su 4.8 si misura solo il codice «prima»
     [Benchmark]
     public List<(string Zone, int Count)> GroupByDictionary()
     {
@@ -43,4 +44,5 @@ public class ScanVsGroupByBenchmark
             Count: pendingByZone.GetValueOrDefault(z.Id, 0)
         )).ToList();
     }
+#endif
 }

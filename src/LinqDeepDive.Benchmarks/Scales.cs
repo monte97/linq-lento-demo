@@ -27,6 +27,6 @@ public static class Scales
     public static FleetOptions Get(string name)
     {
         var at = name.IndexOf('@');
-        return at < 0 ? Map[name] : Map[name[..at]] with { BlockedShare = int.Parse(name[(at + 1)..]) / 100.0 };
+        return at < 0 ? Map[name] : Map[name.Substring(0, at)] with { BlockedShare = int.Parse(name.Substring(at + 1)) / 100.0 };
     }
 }

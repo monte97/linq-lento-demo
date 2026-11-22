@@ -1,0 +1,69 @@
+name: benchmark
+
+# Misure del talk: tutte su windows-latest, avviate a mano.
+# Due giri su due runner diversi (matrice "giro"): in slide vanno i numeri che reggono in entrambi.
+on:
+  workflow_dispatch:
+    inputs:
+      classi:
+        description: "Classi di benchmark, separate da spazi (senza il suffisso Benchmark)"
+        default: "DispatchEndToEnd ScanVsGroupBy ListVsHashSet AllocationsVsForeach TripleNesting ZoneCoverage"
+      giri:
+        description: "Quanti giri, su runner separati (1 o 2)"
+        default: "2"
+
+permissions:
+  contents: read
+
+jobs:
+  bench:
+    runs-on: windows-latest
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      matrix:
+        giro: ${{ fromJSON(inputs.giri == '1' && '[1]' || '[1, 2]') }}
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+      DOTNET_NOLOGO: "1"
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+            11.0.x
+
+      - name: Ambiente
+        shell: pwsh
+        run: |
+          $out = "results/actions/giro-${{ matrix.giro }}"
+          New-Item -ItemType Directory -Force $out | Out-Null
+          & {
+            "run ${{ github.run_id }}, giro ${{ matrix.giro }}, commit ${{ github.sha }}"
+            "inizio $((Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ'))"
+            "immagine $env:ImageOS $env:ImageVersion"
+            Get-CimInstance Win32_Processor | Format-List Name, NumberOfCores, NumberOfLogicalProcessors, MaxClockSpeed
+            "memoria $([math]::Round((Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory / 1GB, 1)) GB"
+            dotnet --list-sdks
+            dotnet --list-runtimes
+          } | Out-File -Encoding utf8 "$out/ambiente.txt"
+          Get-Content "$out/ambiente.txt"
+
+      - name: Benchmark
+        run: scripts/run-actions.sh "${{ inputs.classi }}" "results/actions/giro-${{ matrix.giro }}"
+
+      - name: Fine
+        if: always()
+        run: date -u +"fine %Y-%m-%dT%H:%M:%SZ" >> "results/actions/giro-${{ matrix.giro }}/ambiente.txt"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: benchmark-giro-${{ matrix.giro }}
+          path: results/actions/giro-${{ matrix.giro }}

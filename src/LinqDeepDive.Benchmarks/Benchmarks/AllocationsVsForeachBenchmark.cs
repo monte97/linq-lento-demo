@@ -66,6 +66,7 @@ public class AllocationsVsForeachBenchmark
             .First();
     }
 
+#if !NETFRAMEWORK // .NET Framework 4.8 non ha l'API: su 4.8 si misura solo il codice «prima»
     [BenchmarkCategory("Max"), Benchmark]
     public Delivery MaxByLinear()
     {
@@ -73,4 +74,5 @@ public class AllocationsVsForeachBenchmark
             .Where(d => d.Status == DeliveryStatus.Pending)
             .MaxBy(d => d.WeightKg)!;
     }
+#endif
 }
