@@ -43,6 +43,36 @@ public static class ZoneCoverage
         return left.Concat(rightOnly).OrderBy(r => r.ZoneId, StringComparer.Ordinal).ToList();
     }
 
+    /// <summary>
+    /// Come Classic, ma le zone del solo lato destro si trovano con un HashSet delle chiavi
+    /// invece di riscorrere la lista con Any: separa il merito di FullJoin da quello di non
+    /// essere quadratici nel numero di zone.
+    /// </summary>
+    public static List<ZoneCoverageRow> ClassicHashSet(FleetData data)
+    {
+        var pending = data.Deliveries
+            .Where(d => d.Status == DeliveryStatus.Pending)
+            .GroupBy(d => d.DestinationZoneId)
+            .Select(g => new { ZoneId = g.Key, Count = g.Count() })
+            .ToList();
+        var available = data.Vehicles
+            .Where(v => v.IsAvailable)
+            .GroupBy(v => v.CurrentZoneId)
+            .Select(g => new { ZoneId = g.Key, Count = g.Count() })
+            .ToList();
+
+        var left = pending
+            .GroupJoin(available, p => p.ZoneId, a => a.ZoneId, (p, matches) => new { p, matches })
+            .SelectMany(x => x.matches.DefaultIfEmpty(),
+                (x, a) => new ZoneCoverageRow(x.p.ZoneId, x.p.Count, a?.Count ?? 0));
+        var pendingZones = new HashSet<string>(pending.Select(p => p.ZoneId));
+        var rightOnly = available
+            .Where(a => !pendingZones.Contains(a.ZoneId))
+            .Select(a => new ZoneCoverageRow(a.ZoneId, 0, a.Count));
+
+        return left.Concat(rightOnly).OrderBy(r => r.ZoneId, StringComparer.Ordinal).ToList();
+    }
+
 #if NET11_0_OR_GREATER
     public static List<ZoneCoverageRow> Modern(FleetData data)
     {

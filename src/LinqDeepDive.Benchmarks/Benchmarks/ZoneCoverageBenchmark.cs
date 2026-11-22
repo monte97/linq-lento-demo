@@ -28,13 +28,17 @@ public class ZoneCoverageBenchmark
         _data = DataGenerator.Generate(Scales.Get(Scale) with { Zones = Zones });
         var classic = ZoneCoverage.Classic(_data);
         var modern = ZoneCoverage.Modern(_data);
-        if (!classic.SequenceEqual(modern))
+        var hashSet = ZoneCoverage.ClassicHashSet(_data);
+        if (!classic.SequenceEqual(modern) || !classic.SequenceEqual(hashSet))
             throw new InvalidOperationException($"Classic e Modern divergono: {classic.Count} righe contro {modern.Count}");
         Console.WriteLine($"// ZoneCoverage {Scale} z{Zones}: {classic.Count} righe");
     }
 
     [Benchmark(Baseline = true)]
     public List<ZoneCoverageRow> Classic() => ZoneCoverage.Classic(_data);
+
+    [Benchmark]
+    public List<ZoneCoverageRow> ClassicHashSet() => ZoneCoverage.ClassicHashSet(_data);
 
     [Benchmark]
     public List<ZoneCoverageRow> Modern() => ZoneCoverage.Modern(_data);
