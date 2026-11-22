@@ -84,6 +84,8 @@ jobs:
           CARICO_DOTNET: dotnet
           CARICO_K6: k6
           CARICO_CURL: curl
+          # il PostgreSQL dell'immagine ascolta sulla 5432 (la 5433 è quella del container sul Mac)
+          CARICO_CONNECTION: "Host=localhost;Port=5432;Database=linq_carico;Username=linq;Password=linq"
           CARICO_OUT: results/carico/giro-${{ matrix.giro }}
         run: scripts/run-carico.sh "${{ inputs.scala }}" "${{ inputs.zone }}"
 
