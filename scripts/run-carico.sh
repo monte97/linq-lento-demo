@@ -24,7 +24,7 @@ SCALA=$1; ZONE=$2
 COMPOSE="docker compose -f docker-compose.carico.yml"
 DB_UP=${CARICO_DB_UP-"$COMPOSE up -d --wait"}
 DB_DOWN=${CARICO_DB_DOWN-"$COMPOSE down"}
-DOTNET=${CARICO_DOTNET:-"docker run --rm -i --network host -v $PWD:/src -v linq-nuget:/root/.nuget/packages -w /src -e LinqTfms=net11.0 -e CARICO_CONNECTION -e ASPNETCORE_URLS mcr.microsoft.com/dotnet/sdk:11.0 dotnet"}
+DOTNET=${CARICO_DOTNET:-"docker run --rm -i --network host -v $PWD:/src -v linq-nuget:/root/.nuget/packages -w /src -e LinqTfms -e CARICO_CONNECTION -e ASPNETCORE_URLS mcr.microsoft.com/dotnet/sdk:11.0 dotnet"}
 K6=${CARICO_K6:-"docker run --rm -i --network host -v $PWD:/w -w /w -e BASE_URL -e ENDPOINT -e OUT -e VUS -e RAMPA -e DURATA grafana/k6:2.3.0"}
 CURL=${CARICO_CURL:-"docker run --rm --network host curlimages/curl:8.10.1"}
 PORTA=${CARICO_PORTA:-5080}
@@ -34,6 +34,8 @@ export VUS=${CARICO_VUS:-20} RAMPA=${CARICO_RAMPA:-10s} DURATA=${CARICO_DURATA:-
 [ -n "${CARICO_CONNECTION:-}" ] && export CARICO_CONNECTION
 OUTDIR=${CARICO_OUT:-results/carico/$(date -u +%Y-%m-%d)}
 PUB=src/LinqDeepDive.Api/bin/carico
+# Il Domain è multi-target (LinqTfms): senza questo l'API prende la sua versione net10.0, senza FullJoin
+export LinqTfms=net11.0
 ENDPOINTS="/coverage/classic /coverage/modern /coverage/db /dispatch/before /dispatch/after"
 mkdir -p "$OUTDIR"
 

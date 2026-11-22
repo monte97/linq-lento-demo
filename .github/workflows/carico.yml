@@ -1,0 +1,98 @@
+name: carico
+
+# Atto «E sotto carico?» del talk: lo stesso giro di scripts/run-carico.sh, su windows-latest.
+# PostgreSQL è quello preinstallato nell'immagine (su Windows non ci sono service container),
+# k6 viene dalla release ufficiale. Due giri su runner separati, come per i benchmark.
+on:
+  workflow_dispatch:
+    inputs:
+      scala:
+        description: "Scala del seed (S, M, L, XL, XXL)"
+        default: "L"
+      zone:
+        description: "Numero di zone"
+        default: "20"
+      giri:
+        description: "Quanti giri, su runner separati (1 o 2)"
+        default: "2"
+
+permissions:
+  contents: read
+
+env:
+  K6_VERSION: "2.3.0"
+  DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+  DOTNET_NOLOGO: "1"
+
+jobs:
+  carico:
+    runs-on: windows-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        giro: ${{ fromJSON(inputs.giri == '1' && '[1]' || '[1, 2]') }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 11.0.x
+
+      - name: PostgreSQL preinstallato
+        shell: pwsh
+        run: |
+          $svc = Get-Service -Name "postgresql*" | Select-Object -First 1
+          Set-Service -Name $svc.Name -StartupType Manual
+          Start-Service -Name $svc.Name
+          $env:PGPASSWORD = "root"
+          & "$env:PGBIN\psql" -U postgres -h localhost -c "CREATE ROLE linq LOGIN SUPERUSER PASSWORD 'linq';"
+          & "$env:PGBIN\psql" -U postgres -h localhost -c "CREATE DATABASE linq_carico OWNER linq;"
+          & "$env:PGBIN\psql" -U postgres -h localhost -t -c "SELECT version();" | Out-File -Encoding utf8 postgres-versione.txt
+          "servizio $($svc.Name)"
+
+      - name: k6
+        shell: pwsh
+        run: |
+          $zip = "k6-v$env:K6_VERSION-windows-amd64"
+          Invoke-WebRequest "https://github.com/grafana/k6/releases/download/v$env:K6_VERSION/$zip.zip" -OutFile k6.zip
+          Expand-Archive k6.zip -DestinationPath $env:RUNNER_TEMP
+          "$env:RUNNER_TEMP\$zip" | Out-File -Append -Encoding utf8 $env:GITHUB_PATH
+
+      - name: Ambiente
+        shell: pwsh
+        run: |
+          $out = "results/carico/giro-${{ matrix.giro }}"
+          New-Item -ItemType Directory -Force $out | Out-Null
+          & {
+            "run ${{ github.run_id }}, giro ${{ matrix.giro }}, commit ${{ github.sha }}"
+            "immagine $env:ImageOS $env:ImageVersion"
+            Get-CimInstance Win32_Processor | Format-List Name, NumberOfCores, NumberOfLogicalProcessors, MaxClockSpeed
+            "memoria $([math]::Round((Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory / 1GB, 1)) GB"
+            "postgres $(Get-Content postgres-versione.txt)"
+            dotnet --list-runtimes
+          } | Out-File -Encoding utf8 "$out/runner.txt"
+          Get-Content "$out/runner.txt"
+
+      - name: Giro di carico
+        env:
+          CARICO_DB_UP: ""
+          CARICO_DB_DOWN: ""
+          CARICO_DOTNET: dotnet
+          CARICO_K6: k6
+          CARICO_CURL: curl
+          CARICO_OUT: results/carico/giro-${{ matrix.giro }}
+        run: scripts/run-carico.sh "${{ inputs.scala }}" "${{ inputs.zone }}"
+
+      - name: Tabella
+        if: always()
+        run: python scripts/tabella-carico.py "results/carico/giro-${{ matrix.giro }}"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: carico-giro-${{ matrix.giro }}
+          path: results/carico/giro-${{ matrix.giro }}
