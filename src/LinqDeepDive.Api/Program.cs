@@ -1,4 +1,5 @@
 using LinqDeepDive.Api;
+using LinqDeepDive.Api.Coverage;
 using LinqDeepDive.Api.Data;
 using LinqDeepDive.Domain;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +32,15 @@ builder.Services.AddDbContext<CaricoDbContext>(options =>
 var app = builder.Build();
 
 app.MapGet("/health", () => Results.Ok(new { status = "ok" }));
+
+app.MapGet("/coverage/classic", async (CaricoDbContext db, CancellationToken cancellationToken) =>
+    Results.Ok(await ZoneCoverageQueries.ClassicAsync(db, cancellationToken)));
+
+app.MapGet("/coverage/modern", async (CaricoDbContext db, CancellationToken cancellationToken) =>
+    Results.Ok(await ZoneCoverageQueries.ModernAsync(db, cancellationToken)));
+
+app.MapGet("/coverage/db", async (CaricoDbContext db, CancellationToken cancellationToken) =>
+    Results.Ok(await ZoneCoverageQueries.DbAsync(db, cancellationToken)));
 
 app.Run();
 

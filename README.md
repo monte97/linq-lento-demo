@@ -99,3 +99,13 @@ docker compose -f docker-compose.carico.yml down
 `--seed <scala> <zone>` rigenera i dati con `DataGenerator` (stesse scale dei benchmark, `Scales.cs`) e ricarica le tabelle `vehicles`, `drivers`, `deliveries`, `zones`, `restrictions`. Le liste e i record annidati (`TimeSlot`, `DeliveryRequirement`) stanno in colonne `jsonb`; i record del Domain non cambiano. Connessione predefinita `Host=localhost;Port=5433;Database=linq_carico;Username=linq;Password=linq` (override con `CARICO_CONNECTION`).
 
 Verifica di andata e ritorno (container acceso): `dotnet test tests/LinqDeepDive.Api.Tests`.
+
+Report di copertura delle zone, tre varianti con le stesse righe:
+
+| Endpoint | Come |
+|---|---|
+| `GET /coverage/classic` | righe caricate con EF, `ZoneCoverage.Classic` in memoria |
+| `GET /coverage/modern` | righe caricate con EF, `ZoneCoverage.Modern` in memoria |
+| `GET /coverage/db` | `GroupBy` + `Count` e `FullJoin` su `IQueryable`, tradotti in SQL (`FULL JOIN`) |
+
+EF Core 11 non traduce `CountBy` su `IQueryable`: `/coverage/db` usa `GroupBy` + `Count`, che produce la stessa SQL. Il test di integrazione confronta le tre varianti riga per riga e controlla che la query di `/coverage/db` contenga `FULL JOIN`.

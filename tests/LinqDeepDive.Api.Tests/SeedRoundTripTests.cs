@@ -8,6 +8,7 @@ using Xunit;
 
 namespace LinqDeepDive.Api.Tests;
 
+[Collection("carico-db")]
 public class SeedRoundTripTests
 {
     private static readonly string ConnectionString =
