@@ -27,6 +27,11 @@ if (args.Length > 0 && args[0] == "--seed")
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Sotto carico i log a livello Information (una riga per richiesta e per comando SQL) finiscono
+// nella misura: il 22/11 un giro a scala L ne ha scritti 475 MB. Restano avvisi, errori e avvio.
+builder.Logging.SetMinimumLevel(LogLevel.Warning);
+builder.Logging.AddFilter("Microsoft.Hosting.Lifetime", LogLevel.Information);
+
 builder.Services.AddDbContext<CaricoDbContext>(options =>
     options.UseNpgsql(CaricoConnection.Resolve(builder.Configuration.GetConnectionString("Carico"))));
 
