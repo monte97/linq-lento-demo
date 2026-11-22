@@ -43,8 +43,17 @@ public static class ZoneCoverageQueries
 
         return pending
             .FullJoin(available, p => p.ZoneId, a => a.ZoneId,
-                (p, a) => new { ZoneId = p!.ZoneId ?? a!.ZoneId, Pending = p!.Count, Available = a!.Count })
-            .OrderBy(x => x.ZoneId)
+                (p, a) => new
+                {
+                    ZoneId = p!.ZoneId ?? a!.ZoneId,
+                    // Il lato assente di un full join arriva NULL: i conteggi vanno letti
+                    // come nullable e riportati a 0, altrimenti EF legge un int da NULL.
+                    Pending = (int?)p!.Count ?? 0,
+                    Available = (int?)a!.Count ?? 0
+                })
+            // Stesso ordine della variante in memoria (StringComparer.Ordinal):
+            // la collation del database non e' ordinale, quindi la si forza in SQL.
+            .OrderBy(x => EF.Functions.Collate(x.ZoneId, "C"))
             .Select(x => new ZoneCoverageRow(x.ZoneId, x.Pending, x.Available));
     }
 
