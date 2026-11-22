@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: linq-carico-postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: linq
+      POSTGRES_PASSWORD: linq
+      POSTGRES_DB: linq_carico
+    # Volume temporaneo: i dati spariscono insieme al container.
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U linq -d linq_carico"]
+      interval: 2s
+      timeout: 3s
+      retries: 30

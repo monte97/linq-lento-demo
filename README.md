@@ -83,3 +83,19 @@ L'immagine `grafana/otel-lgtm` e' pensata per sviluppo e demo. Il tracing non e'
 Con i vincoli di `FleetData` (2.000 vincoli su 20 zone x 3 tipi x 5 fasce) quasi ogni combinazione risulta bloccata: gli assegnamenti del dispatcher sono 0 alle taglie L e oltre. Il comportamento di default non cambia.
 
 Profilo con assegnamenti (opzionale): `FleetOptions.BlockedShare` (es. `0.7`) limita i vincoli al 70% delle 300 combinazioni zona/tipo/fascia, ripetendoli con motivi diversi; il resto resta libero. Dalla console e dai benchmark si usa il suffisso `@<percentuale>` sul nome della scala (`--dispatch XL12@70 --prima`, `Scales.Get("XL12@70")`). Benchmark: `DispatchOpenSlotsBenchmark`. Numeri: `linq-lento-talk/docs/misure/2026-10-29-dataset-con-assegnamenti.md`.
+
+## Carico
+
+Carico su PostgreSQL 17 per misurare quanto della velocita' in memoria resta su un endpoint reale. Database temporaneo (tmpfs, porta 5433), minimal API .NET 11 in `src/LinqDeepDive.Api`.
+
+Versioni: **EF Core 11.0.0**, **Npgsql.EntityFrameworkCore.PostgreSQL 11.0.0** (Npgsql 11.0.0).
+
+```bash
+docker compose -f docker-compose.carico.yml up -d
+dotnet run --project src/LinqDeepDive.Api -- --seed L 20   # richiede l'SDK 11
+docker compose -f docker-compose.carico.yml down
+```
+
+`--seed <scala> <zone>` rigenera i dati con `DataGenerator` (stesse scale dei benchmark, `Scales.cs`) e ricarica le tabelle `vehicles`, `drivers`, `deliveries`, `zones`, `restrictions`. Le liste e i record annidati (`TimeSlot`, `DeliveryRequirement`) stanno in colonne `jsonb`; i record del Domain non cambiano. Connessione predefinita `Host=localhost;Port=5433;Database=linq_carico;Username=linq;Password=linq` (override con `CARICO_CONNECTION`).
+
+Verifica di andata e ritorno (container acceso): `dotnet test tests/LinqDeepDive.Api.Tests`.
